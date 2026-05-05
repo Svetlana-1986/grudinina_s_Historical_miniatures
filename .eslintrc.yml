@@ -1,0 +1,35 @@
+root: true
+
+env:
+  es2021: true
+  node: true
+
+parser: '@typescript-eslint/parser'
+
+extends:
+  - eslint:recommended
+  - prettier
+
+ignorePatterns:
+  - node_modules
+  - dist
+
+rules:
+  '@typescript-eslint/consistent-type-definitions':
+    - error
+    - type
+
+  '@typescript-eslint/strict-boolean-expressions': off
+  '@typescript-eslint/prefer-nullish-coalescing': off
+  '@typescript-eslint/explicit-function-return-type': off
+
+  no-console:
+    - error
+    - allow:
+        - warn
+        - error
+        - info
+
+  curly:
+    - error
+    - all

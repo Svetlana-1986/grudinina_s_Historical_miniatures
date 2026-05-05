@@ -2,6 +2,7 @@
   "name": "miniaturenick",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "workspaces": [
     "backend",
     "webapp"
@@ -14,14 +15,25 @@
     "types:webapp": "npm run types --workspace webapp",
     "types": "concurrently \"npm run types:backend\" \"npm run types:webapp\"",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "concurrently \"npm run lint --workspace backend\" \"npm run lint --workspace webapp\""
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
     "concurrently": "^9.2.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "prettier": "^3.8.3",
     "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "globals": "^17.5.0",
     "typescript": "^6.0.3"
   }
 }

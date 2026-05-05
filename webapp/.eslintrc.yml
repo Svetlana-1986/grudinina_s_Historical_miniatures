@@ -1,0 +1,20 @@
+extends:
+  - react-app
+  - ../.eslintrc.yml
+
+env:
+  browser: true
+
+globals:
+  React: readonly
+
+parserOptions:
+  project:
+    - ./tsconfig.app.json
+    - ./tsconfig.node.json
+
+overrides:
+  - files:
+      - vite.config.ts
+    parserOptions:
+      project: ./tsconfig.node.json
