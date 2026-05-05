@@ -5,4 +5,4 @@ plugins:
   - '@typescript-eslint'
 
 parserOptions:
-  project: ./tsconfig.json
+  'project': './backend/tsconfig.json'
