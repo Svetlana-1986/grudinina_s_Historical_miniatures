@@ -1,5 +1,6 @@
 extends:
   - ../.eslintrc.yml
+  - plugin:@typescript-eslint/recommended
 
 plugins:
   - '@typescript-eslint'

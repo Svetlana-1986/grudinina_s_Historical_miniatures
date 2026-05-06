@@ -12,7 +12,6 @@ parserOptions:
   project:
     - ./tsconfig.app.json
     - ./tsconfig.node.json
-    - ./tsconfig.json
 
 overrides:
   - files:

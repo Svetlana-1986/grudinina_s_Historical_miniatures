@@ -41,12 +41,10 @@
   },
   "lint-staged": {
     "backend/**/*.ts": [
-      "eslint --fix",
-      "prettier --write"
+      "npm run lint --workspace backend -- --fix"
     ],
     "webapp/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "npm run lint --workspace webapp -- --fix"
     ]
   }
 }
