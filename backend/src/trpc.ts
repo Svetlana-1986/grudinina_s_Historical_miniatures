@@ -1,7 +1,5 @@
 import { initTRPC } from '@trpc/server';
 
-// const x: string = 123;
-
 const cards = [
   {
     nick: 'card - 1',
