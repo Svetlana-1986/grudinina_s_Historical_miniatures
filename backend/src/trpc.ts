@@ -2,7 +2,7 @@ import { initTRPC } from '@trpc/server';
 
 const cards = [
   {
-    nick: 'card - 1',
+    nick: 'card-1',
     historical_period: 'period',
     author: 'nickname',
     title: 'Миниатюра-1',

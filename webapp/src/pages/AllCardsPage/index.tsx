@@ -1,4 +1,6 @@
 import { trpc } from '../../lib/trpc';
+import { Link } from 'react-router-dom';
+import { getViewCardPageRoute } from '../../lib/routes';
 
 export const AllCardsPage = () => {
   const { data, error, isLoading, isFetching, isError } =
@@ -18,12 +20,16 @@ export const AllCardsPage = () => {
 
   return (
     <div>
-      <h1>Военно-историческая миниатюра</h1>
+      <h1>Все миниатюры</h1>
       {data.cards.map((card) => (
         <div key={card.nick}>
-          <h2>{card.author}</h2>
+          <h2>
+            <Link to={getViewCardPageRoute({ cardNick: card.nick })}>
+              {card.title}
+            </Link>
+          </h2>
           <p>{card.historical_period}</p>
-          <p>{card.title}</p>
+          <p>{card.author}</p>
           <p>{card.description}</p>
         </div>
       ))}
