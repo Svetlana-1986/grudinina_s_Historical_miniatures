@@ -7,6 +7,7 @@ import {
   getMainCardPageRoute,
   getAllCardsPageRoute,
   getViewCardPageRoute,
+  viewCardPageRouteParams,
 } from './lib/routes';
 
 export const App = () => {
@@ -17,7 +18,7 @@ export const App = () => {
           <Route path={getMainCardPageRoute()} element={<MainCardPage />} />
           <Route path={getAllCardsPageRoute()} element={<AllCardsPage />} />
           <Route
-            path={getViewCardPageRoute({ cardNick: ':cardNick' })}
+            path={getViewCardPageRoute(viewCardPageRouteParams)}
             element={<ViewCardPage />}
           />
         </Routes>

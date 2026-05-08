@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
+import { type ViewCardPageRouteParams } from '../../lib/routes';
 
 export const ViewCardPage = () => {
-  const { cardNick } = useParams() as { cardNick: string };
+  const { cardNick } = useParams() as ViewCardPageRouteParams;
   return (
     <div>
       <h1>{cardNick} </h1>
