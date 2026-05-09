@@ -4,7 +4,7 @@ import { getAllCardsPageRoute, getMainCardPageRoute } from '../../lib/routes';
 export const MainCardPage = () => {
   return (
     <div>
-      <h1>Военно-историческая миниатюра</h1>
+      <h1>Historical miniature</h1>
       <h2>
         <Link to={getMainCardPageRoute()}>Главная</Link>
       </h2>
@@ -13,6 +13,7 @@ export const MainCardPage = () => {
       </h2>
       <h2>Регистрация</h2>
       <h2>Контакты</h2>
+      <h2>Форум</h2>
     </div>
   );
 };

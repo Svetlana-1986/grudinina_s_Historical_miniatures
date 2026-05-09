@@ -28,7 +28,7 @@ export const AllCardsPage = () => {
               {card.title}
             </Link>
           </h2>
-          <p>{card.historical_period}</p>
+          <p>{card.historicalPeriod}</p>
           <p>{card.author}</p>
           <p>{card.description}</p>
         </div>

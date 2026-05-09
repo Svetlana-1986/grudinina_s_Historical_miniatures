@@ -1,35 +1,16 @@
 import { initTRPC } from '@trpc/server';
+import _ from 'lodash';
+import { z } from 'zod';
 
-const cards = [
-  {
-    nick: 'card-1',
-    historical_period: 'period',
-    author: 'nickname',
-    title: 'Миниатюра-1',
-    description: '1',
-  },
-  {
-    nick: 'card-2',
-    historical_period: 'period',
-    author: 'nickname',
-    title: 'Миниатюра-2',
-    description: '2',
-  },
-  {
-    nick: 'card-3',
-    historical_period: 'period',
-    author: 'nickname',
-    title: 'Миниатюра-3',
-    description: '3',
-  },
-  {
-    nick: 'card-4',
-    historical_period: 'period',
-    author: 'nickname',
-    title: 'Миниатюра-4',
-    description: '4',
-  },
-];
+// генерирует карточки с 0 до 99 - библиотека lodash
+const cards = _.times(100, (i) => ({
+  nick: `card-${i}`,
+  title: `Миниатюра ${i}`,
+  historicalPeriod: 'Исторический период:',
+  author: 'Имя автора:',
+  description: `Описание Миниатюра ${i}`,
+  text: _.times(100, (j) => `<p>Текст ${j} миниатюра ${i}...</p>`).join(''),
+}));
 
 // инициализируем
 const trpc = initTRPC.create();
@@ -37,8 +18,29 @@ const trpc = initTRPC.create();
 // создаем роутер,который возвращает инфу с backend
 export const trpcRouter = trpc.router({
   getCards: trpc.procedure.query(() => {
-    return { cards };
+    // покажет только эти строки
+    return {
+      cards: cards.map((card) =>
+        _.pick(card, [
+          'nick',
+          'title',
+          'historicalPeriod',
+          'author',
+          'description',
+        ]),
+      ),
+    };
   }),
+  getCard: trpc.procedure
+    .input(
+      z.object({
+        cardNick: z.string(),
+      }),
+    )
+    .query(({ input }) => {
+      const card = cards.find((card) => card.nick === input.cardNick);
+      return { card: card || null };
+    }),
 });
 
 // типы автоматически “протекают” на клиент, на frontend
