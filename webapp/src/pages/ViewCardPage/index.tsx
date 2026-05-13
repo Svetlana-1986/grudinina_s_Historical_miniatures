@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { type ViewCardPageRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
+import css from './index.module.scss';
 
 export const ViewCardPage = () => {
   const { cardNick } = useParams() as ViewCardPageRouteParams;
@@ -23,13 +24,16 @@ export const ViewCardPage = () => {
 
   return (
     <div>
-      <h1>{data.card.title} </h1>
-      <p>{data.card.historicalPeriod}</p>
-      <p>{data.card.author}</p>
+      <h1 className={css.title}>{data.card.title} </h1>
+      <p className={css.description}>{data.card.historicalPeriod}</p>
+      <p className={css.description}>{data.card.author}</p>
       <div>
-        <p>{data.card.description}</p>
+        <p className={css.description}>{data.card.description}</p>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: data?.card.text }} />
+      <div
+        className={css.text}
+        dangerouslySetInnerHTML={{ __html: data?.card.text }}
+      />
     </div>
   );
 };

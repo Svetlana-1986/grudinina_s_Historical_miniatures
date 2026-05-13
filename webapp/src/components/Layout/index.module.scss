@@ -1,0 +1,60 @@
+@use '../../styles/vars.scss' as vars;
+@use '../../styles/mixins.scss' as css;
+
+.layout {
+  display: flex;
+  //   flex-flow: row nowrap;
+  min-height: 100vh;
+
+  @media (max-width: 900px) {
+    flex-flow: column nowrap;
+  }
+
+  .navigation {
+    // height: 100%;
+    // overflow: auto;
+    flex: 0 0 240px;
+    padding: 20px 30px;
+    border-right: 1px solid vars.$sandy;
+
+    @media (max-width: 900px) {
+      overflow: visible;
+      flex: 0 0 auto;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid vars.$sandy;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .menu {
+      .item {
+        &:not(:first-child) {
+          margin-top: 5px;
+        }
+
+        .link {
+          @include css.link();
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .content {
+    // height: 100%;
+    // overflow: auto;
+    flex: 1;
+    padding: 20px 30px;
+
+    @media (max-width: 900px) {
+      overflow: visible;
+      flex: 0 0 auto;
+      height: auto;
+    }
+  }
+}

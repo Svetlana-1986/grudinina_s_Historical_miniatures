@@ -9,18 +9,24 @@ import {
   getViewCardPageRoute,
   viewCardPageRouteParams,
 } from './lib/routes';
+import { Layout } from './components/Layout';
+import './styles/global.scss';
 
 export const App = () => {
   return (
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={getMainCardPageRoute()} element={<MainCardPage />} />
-          <Route path={getAllCardsPageRoute()} element={<AllCardsPage />} />
-          <Route
-            path={getViewCardPageRoute(viewCardPageRouteParams)}
-            element={<ViewCardPage />}
-          />
+          <Route element={<Layout />}>
+            <Route path={getMainCardPageRoute()} element={<MainCardPage />} />
+
+            <Route path={getAllCardsPageRoute()} element={<AllCardsPage />} />
+
+            <Route
+              path={getViewCardPageRoute(viewCardPageRouteParams)}
+              element={<ViewCardPage />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TrpcProvider>

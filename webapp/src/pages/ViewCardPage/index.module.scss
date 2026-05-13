@@ -1,0 +1,20 @@
+@use '../../styles/vars.scss' as vars;
+@use '../../styles/mixins.scss' as css;
+
+.title {
+  @include css.h1;
+  margin-bottom: 2px;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 14px;
+
+  & > *:not(:first-child) {
+    margin-top: 10px;
+  }
+}

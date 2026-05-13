@@ -1,0 +1,29 @@
+@use '../../styles/vars.scss' as vars;
+@use '../../styles/mixins.scss' as css;
+
+.title {
+  @include css.h1;
+}
+
+.cards {
+  .card {
+    padding: 20px;
+    border: 1px solid vars.$sandy;
+    border-radius: 10px;
+    & + .card {
+      margin-top: 20px;
+    }
+
+    .cardName {
+      @include css.h2;
+
+      .cardLink {
+        @include css.link;
+      }
+    }
+
+    .cardDescription {
+      font-size: 16px;
+    }
+  }
+}
