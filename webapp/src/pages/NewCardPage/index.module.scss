@@ -1,0 +1,11 @@
+@use '../../styles/vars.scss' as vars;
+@use '../../styles/mixins.scss' as css;
+
+.title {
+  @include css.h1;
+
+  // .description {
+  //   font-size: vars.$fontSizeLg;
+  //   margin-bottom: 20px;
+  // }
+}

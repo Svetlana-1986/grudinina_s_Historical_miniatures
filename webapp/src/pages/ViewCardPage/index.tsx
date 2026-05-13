@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { type ViewCardPageRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 import css from './index.module.scss';
+import { Segment } from '../../components/Segment';
 
 export const ViewCardPage = () => {
   const { cardNick } = useParams() as ViewCardPageRouteParams;
@@ -23,17 +24,19 @@ export const ViewCardPage = () => {
   }
 
   return (
-    <div>
-      <h1 className={css.title}>{data.card.title} </h1>
-      <p className={css.description}>{data.card.historicalPeriod}</p>
-      <p className={css.description}>{data.card.author}</p>
-      <div>
-        <p className={css.description}>{data.card.description}</p>
+    <Segment title={data.card.title}>
+      <div className={css.meta}>
+        <p className={css.metaItem}>Период: {data.card.historicalPeriod}</p>
+
+        <p className={css.metaItem}>Автор: {data.card.author}</p>
       </div>
+
+      <div className={css.description}>{data.card.description}</div>
+
       <div
         className={css.text}
-        dangerouslySetInnerHTML={{ __html: data?.card.text }}
+        dangerouslySetInnerHTML={{ __html: data.card.text }}
       />
-    </div>
+    </Segment>
   );
 };

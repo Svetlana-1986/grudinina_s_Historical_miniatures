@@ -1,7 +1,12 @@
 // Layout Главная, Все миниатюры
 
 import { Link, Outlet } from 'react-router-dom';
-import { getAllCardsPageRoute, getMainCardPageRoute } from '../../lib/routes';
+import {
+  getAllCardsPageRoute,
+  getMainCardPageRoute,
+  getNewCardPageRoute,
+  getForumPage,
+} from '../../lib/routes';
 import css from './index.module.scss';
 
 export const Layout = () => {
@@ -21,7 +26,12 @@ export const Layout = () => {
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getAllCardsPageRoute()}>
+            <Link className={css.link} to={getNewCardPageRoute()}>
+              Создать карточку
+            </Link>
+          </li>
+          <li className={css.item}>
+            <Link className={css.link} to={getForumPage()}>
               Форум
             </Link>
           </li>

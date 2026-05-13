@@ -1,20 +1,36 @@
 @use '../../styles/vars.scss' as vars;
-@use '../../styles/mixins.scss' as css;
 
-.title {
-  @include css.h1;
-  margin-bottom: 2px;
+.meta {
+  margin-bottom: 24px;
+}
+
+.metaItem {
+  font-size: vars.$fontSizeMd;
+  opacity: 0.8;
+  line-height: 1.5;
+
+  & + .metaItem {
+    margin-top: 6px;
+  }
 }
 
 .description {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: vars.$fontSizeLg;
+  line-height: 1.6;
+
+  margin-bottom: 30px;
 }
+
+
 
 .text {
-  font-size: 14px;
-
-  & > *:not(:first-child) {
-    margin-top: 10px;
-  }
+  line-height: 1.7;
 }
+
+// .text {
+//   font-size: vars.$fontSizeSm;
+
+//   & > *:not(:first-child) {
+//     margin-top: 10px;
+//   }
+// }

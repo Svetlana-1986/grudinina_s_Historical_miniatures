@@ -1,10 +1,12 @@
 // import { Link } from 'react-router-dom';
 // import { getAllCardsPageRoute, getMainCardPageRoute } from '../../lib/routes';
 
+import css from './index.module.scss';
+
 export const MainCardPage = () => {
   return (
     <div>
-      <h2>История в деталях</h2>
+      <h1 className={css.title}>История в деталях</h1>
     </div>
   );
 };
