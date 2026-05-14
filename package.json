@@ -47,7 +47,7 @@
       "npm run lint --workspace webapp -- --fix"
     ],
     "webapp/**/*.{scss,css}": [
-      "cd webapp && npm run stylelint:fix"
+      "npm run stylelint:fix --workspace webapp"
     ]
   }
 }

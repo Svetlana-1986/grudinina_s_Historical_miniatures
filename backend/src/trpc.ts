@@ -6,8 +6,8 @@ import { z } from 'zod';
 const cards = _.times(100, (i) => ({
   nick: `card-${i}`,
   title: `Миниатюра ${i}`,
-  historicalPeriod: 'Исторический период:',
-  author: 'Имя автора:',
+  historicalPeriod: 'Исторический период',
+  author: 'Имя автора',
   description: `Описание Миниатюра ${i}`,
   text: _.times(100, (j) => `<p>Текст ${j} миниатюра ${i}...</p>`).join(''),
 }));
