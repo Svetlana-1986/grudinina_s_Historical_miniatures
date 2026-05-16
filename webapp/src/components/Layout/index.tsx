@@ -6,6 +6,7 @@ import {
   getMainCardPageRoute,
   getNewCardPageRoute,
   getForumPage,
+  getRegistrationPage,
 } from '../../lib/routes';
 import css from './index.module.scss';
 
@@ -36,7 +37,7 @@ export const Layout = () => {
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getAllCardsPageRoute()}>
+            <Link className={css.link} to={getRegistrationPage()}>
               Регистрация
             </Link>
           </li>

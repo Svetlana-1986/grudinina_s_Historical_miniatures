@@ -20,6 +20,8 @@ export const getNewCardPageRoute = () => 'cards/new';
 
 export const getForumPage = () => 'cards/forum';
 
+export const getRegistrationPage = () => 'cards/registration'
+
 // export const viewCardPageRouteParams = { cardNick: ':cardNick' };
 // export type ViewCardPageRouteParams = { cardNick: string };
 // export const getViewCardPageRoute = ({ cardNick }: { cardNick: string }) =>

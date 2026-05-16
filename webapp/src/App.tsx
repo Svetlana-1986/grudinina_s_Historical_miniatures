@@ -13,6 +13,8 @@ import { AllCardsPage } from './pages/AllCardsPage';
 import { ViewCardPage } from './pages/ViewCardPage';
 import { NewCardPage } from './pages/NewCardPage';
 import { ForumPage } from './pages/ForumPage';
+import { RegistrationPage } from './pages/RegistrationPage';
+
 import './styles/global.scss';
 
 export const App = () => {
@@ -40,6 +42,10 @@ export const App = () => {
               element={<NewCardPage />}
             />
             <Route path={routes.getForumPage()} element={<ForumPage />} />
+            <Route
+              path={routes.getRegistrationPage()}
+              element={<RegistrationPage />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

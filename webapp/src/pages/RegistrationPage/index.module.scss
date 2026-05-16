@@ -1,0 +1,9 @@
+@use '../../styles/vars.scss' as vars;
+@use '../../styles/mixins.scss' as css;
+
+.title {
+  @include css.h1;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
