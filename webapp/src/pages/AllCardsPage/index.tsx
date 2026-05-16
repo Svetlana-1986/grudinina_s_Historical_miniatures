@@ -39,7 +39,9 @@ export const AllCardsPage = () => {
             >
               <p className={css.cardMeta}>Период: {card.historicalPeriod}</p>
 
-              <p className={css.cardMeta}>Автор: {card.author}</p>
+              <p className={css.cardMeta}>Nick автора: {card.authorNick}</p>
+
+              <p className={css.cardMeta}>Имя автора: {card.authorName}</p>
             </Segment>
           </div>
         ))}

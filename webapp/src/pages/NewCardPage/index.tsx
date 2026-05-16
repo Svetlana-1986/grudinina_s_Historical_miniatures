@@ -1,13 +1,56 @@
-import { useState } from 'react';
+import { useFormik } from 'formik';
 import { Segment } from '../../components/Segment';
+import { Input } from '../../components/Input';
+import { TextArea } from '../../components/TextArea';
+import { withZodSchema } from 'formik-validator-zod';
+import { z } from 'zod';
 
 export const NewCardPage = () => {
-  const [state, setState] = useState({
-    title: '',
-    historicalPeriod: '',
-    author: '',
-    description: '',
-    text: '',
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      historicalPeriod: '',
+      authorNick: '',
+      authorName: '',
+      description: '',
+      text: '',
+    },
+
+    validate: withZodSchema(
+      z.object({
+        title: z.string().min(1, 'Поле не заполнено'),
+
+        historicalPeriod: z.string().min(1, 'Поле не заполнено'),
+
+        authorNick: z
+          .string()
+          .min(1, 'Поле не заполнено')
+          .regex(
+            /^[a-z0-9-]+$/,
+            'Nick автора может содержать только строчные латинские буквы, цифры и дефис',
+          ),
+
+        authorName: z
+          .string()
+          .min(1, 'Поле не заполнено')
+          .refine(
+            (value) =>
+              /^([A-ZА-ЯЁ][a-zа-яё]+)(\s[A-ZА-ЯЁ][a-zа-яё]+)*$/u.test(value),
+            {
+              message: 'Имя и фамилия должны начинаться с заглавной буквы',
+            },
+          ),
+
+        description: z
+          .string()
+          .min(1, 'Поле не заполнено')
+          .max(5000, 'Поле должно содержать не больше 5000 символов'),
+      }),
+    ),
+
+    onSubmit: (values) => {
+      console.info('Submitted', values);
+    },
   });
 
   return (
@@ -15,76 +58,28 @@ export const NewCardPage = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.info('Submitted', state);
+          formik.handleSubmit();
         }}
       >
-        <div style={{ marginBottom: 10 }}>
-          <label htmlFor="title">Название</label>
-          <br />
-          <input
-            type="text"
-            onChange={(e) => {
-              setState({ ...state, title: e.target.value });
-            }}
-            value={state.title}
-            name="title"
-            id="title"
-          />
-        </div>
+        <Input name="title" label="Название" formik={formik} />
 
-        <div style={{ marginBottom: 10 }}>
-          <label htmlFor="historicalPeriod">Период</label>
-          <br />
-          <input
-            type="text"
-            onChange={(e) => {
-              setState({ ...state, historicalPeriod: e.target.value });
-            }}
-            value={state.historicalPeriod}
-            name="historicalPeriod"
-            id="historicalPeriod"
-          />
-        </div>
+        <Input name="historicalPeriod" label="Период" formik={formik} />
 
-        <div style={{ marginBottom: 10 }}>
-          <label htmlFor="author">Автор</label>
-          <br />
-          <input
-            type="text"
-            onChange={(e) => {
-              setState({ ...state, author: e.target.value });
-            }}
-            value={state.author}
-            name="author"
-            id="author"
-          />
-        </div>
+        <Input name="authorNick" label="Nick автора" formik={formik} />
 
-        <div style={{ marginBottom: 10 }}>
-          <label htmlFor="description">Описание</label>
-          <br />
-          <textarea
-            onChange={(e) => {
-              setState({ ...state, description: e.target.value });
-            }}
-            value={state.description}
-            name="description"
-            id="description"
-          />
-        </div>
+        <Input name="authorName" label="Имя автора" formik={formik} />
 
-        {/* <div style={{ marginBottom: 10 }}>
-          <label htmlFor="text">Text</label>
-          <br />
-          <textarea
-            onChange={(e) => {
-              setState({ ...state, text: e.target.value });
-            }}
-            value={state.text}
-            name="text"
-            id="text"
-          />
-        </div> */}
+        <TextArea
+          name="description"
+          label="Описание миниатюры"
+          formik={formik}
+        />
+
+        {!formik.isValid && !!formik.submitCount && (
+          <div style={{ color: 'red' }}>
+            Некоторые поля заполнены некорректно
+          </div>
+        )}
 
         <button type="submit">Создать карточку</button>
       </form>

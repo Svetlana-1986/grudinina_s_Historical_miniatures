@@ -28,7 +28,9 @@ export const ViewCardPage = () => {
       <div className={css.meta}>
         <p className={css.metaItem}>Период: {data.card.historicalPeriod}</p>
 
-        <p className={css.metaItem}>Автор: {data.card.author}</p>
+        <p className={css.metaItem}>Nick автора: {data.card.authorNick}</p>
+
+        <p className={css.metaItem}>Имя автора: {data.card.authorName}</p>
       </div>
 
       <div className={css.description}>{data.card.description}</div>

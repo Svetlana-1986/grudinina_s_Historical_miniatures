@@ -1,4 +1,3 @@
 #!/bin/sh
 
 npm run types
-npm run build --workspace webapp
