@@ -1,10 +1,14 @@
 import { trpc } from '../lib/trpc';
+// @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TrpcRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
 import { getCardTrpcRoute } from './getCard';
 import { getCardsTrpcRoute } from './getCards';
+// @endindex
 
 export const trpcRouter = trpc.router({
+  // @index('./**/index.ts', f => `${f.path.split('/').slice(0, -1).pop()}: ${f.path.split('/').slice(0, -1).pop()}TrpcRoute,`)
   getCard: getCardTrpcRoute,
   getCards: getCardsTrpcRoute,
+  // @endindex
 });
 
 // типы автоматически “протекают” на клиент, на frontend
