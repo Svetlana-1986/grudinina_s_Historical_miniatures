@@ -35,10 +35,12 @@ export const ViewCardPage = () => {
 
       <div className={css.description}>{data.card.description}</div>
 
-      <div
-        className={css.text}
-        dangerouslySetInnerHTML={{ __html: data.card.text }}
-      />
+      {data.card.text && (
+        <div
+          className={css.text}
+          dangerouslySetInnerHTML={{ __html: data.card.text }}
+        />
+      )}
     </Segment>
   );
 };

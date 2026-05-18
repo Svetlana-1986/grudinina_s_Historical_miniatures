@@ -35,7 +35,7 @@ export const AllCardsPage = () => {
                   {card.title}
                 </Link>
               }
-              description={card.description}
+              // description={card.description}
             >
               <p className={css.cardMeta}>Период: {card.historicalPeriod}</p>
 

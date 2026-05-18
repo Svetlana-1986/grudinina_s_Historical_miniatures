@@ -4,8 +4,11 @@ import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextArea';
 import { withZodSchema } from 'formik-validator-zod';
 import { z } from 'zod';
+import { trpc } from '../../lib/trpc';
 
 export const NewCardPage = () => {
+  // создание карточки на backend
+  const createCard = trpc.createCard.useMutation();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -48,8 +51,8 @@ export const NewCardPage = () => {
       }),
     ),
 
-    onSubmit: (values) => {
-      console.info('Submitted', values);
+    onSubmit: async (values) => {
+      await createCard.mutateAsync(values);
     },
   });
 
