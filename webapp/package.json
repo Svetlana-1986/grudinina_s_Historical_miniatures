@@ -22,8 +22,7 @@
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.0",
     "reset-css": "^5.0.2",
-    "sass": "^1.99.0",
-    "zod": "^3.25.76"
+    "sass": "^1.99.0"
   },
   "devDependencies": {
     "@types/node": "^24.12.2",

@@ -7,7 +7,7 @@ export const getCardsTrpcRoute = trpc.procedure.query(() => {
   return {
     cards: cards.map((card) =>
       _.pick(card, [
-        'nick',
+        'slug',
         'title',
         'historicalPeriod',
         'authorNick',

@@ -5,10 +5,10 @@ import { trpc } from '../../lib/trpc';
 export const getCardTrpcRoute = trpc.procedure
   .input(
     z.object({
-      cardNick: z.string(),
+      cardSlug: z.string(),
     }),
   )
   .query(({ input }) => {
-    const card = cards.find((card) => card.nick === input.cardNick);
+    const card = cards.find((card) => card.slug === input.cardSlug);
     return { card: card || null };
   });

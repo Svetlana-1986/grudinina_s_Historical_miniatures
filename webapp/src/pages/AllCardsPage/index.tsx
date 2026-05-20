@@ -24,18 +24,17 @@ export const AllCardsPage = () => {
     <Segment title="Все миниатюры">
       <div className={css.cards}>
         {data.cards.map((card) => (
-          <div className={css.card} key={card.nick}>
+          <div className={css.card} key={card.slug}>
             <Segment
               size={2}
               title={
                 <Link
                   className={css.cardLink}
-                  to={getViewCardPageRoute({ cardNick: card.nick })}
+                  to={getViewCardPageRoute({ cardSlug: card.slug })}
                 >
                   {card.title}
                 </Link>
               }
-              // description={card.description}
             >
               <p className={css.cardMeta}>Период: {card.historicalPeriod}</p>
 
@@ -47,21 +46,5 @@ export const AllCardsPage = () => {
         ))}
       </div>
     </Segment>
-
-    // <div>
-    //   <h1 className={css.title}>Все миниатюры</h1>
-    //   {data.cards.map((card) => (
-    //     <div key={card.nick}>
-    //       <h2>
-    //         <Link to={getViewCardPageRoute({ cardNick: card.nick })}>
-    //           {card.title}
-    //         </Link>
-    //       </h2>
-    //       <p>{card.historicalPeriod}</p>
-    //       <p>{card.author}</p>
-    //       <p>{card.description}</p>
-    //     </div>
-    //   ))}
-    // </div>
   );
 };

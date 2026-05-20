@@ -3,54 +3,23 @@ import { Segment } from '../../components/Segment';
 import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextArea';
 import { withZodSchema } from 'formik-validator-zod';
-import { z } from 'zod';
 import { trpc } from '../../lib/trpc';
-
+import {
+  zCreateCardTrpcInput,
+  type CreateCardInput,
+} from '@miniaturenick/backend/src/router/createCard/input';
 export const NewCardPage = () => {
-  // создание карточки на backend
   const createCard = trpc.createCard.useMutation();
-  const formik = useFormik({
+  const formik = useFormik<CreateCardInput>({
     initialValues: {
       title: '',
       historicalPeriod: '',
       authorNick: '',
       authorName: '',
       description: '',
-      text: '',
     },
 
-    validate: withZodSchema(
-      z.object({
-        title: z.string().min(1, 'Поле не заполнено'),
-
-        historicalPeriod: z.string().min(1, 'Поле не заполнено'),
-
-        authorNick: z
-          .string()
-          .min(1, 'Поле не заполнено')
-          .regex(
-            /^[a-z0-9-]+$/,
-            'Nick автора может содержать только строчные латинские буквы, цифры и дефис',
-          ),
-
-        authorName: z
-          .string()
-          .min(1, 'Поле не заполнено')
-          .refine(
-            (value) =>
-              /^([A-ZА-ЯЁ][a-zа-яё]+)(\s[A-ZА-ЯЁ][a-zа-яё]+)*$/u.test(value),
-            {
-              message: 'Имя и фамилия должны начинаться с заглавной буквы',
-            },
-          ),
-
-        description: z
-          .string()
-          .min(1, 'Поле не заполнено')
-          .max(5000, 'Поле должно содержать не больше 5000 символов'),
-      }),
-    ),
-
+    validate: withZodSchema(zCreateCardTrpcInput),
     onSubmit: async (values) => {
       await createCard.mutateAsync(values);
     },

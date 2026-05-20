@@ -5,10 +5,10 @@ import css from './index.module.scss';
 import { Segment } from '../../components/Segment';
 
 export const ViewCardPage = () => {
-  const { cardNick } = useParams() as ViewCardPageRouteParams;
+  const { cardSlug } = useParams() as ViewCardPageRouteParams;
   // получение card с backend
   const { data, error, isLoading, isFetching, isError } = trpc.getCard.useQuery(
-    { cardNick },
+    { cardSlug },
   );
 
   if (isLoading || isFetching) {
@@ -34,13 +34,6 @@ export const ViewCardPage = () => {
       </div>
 
       <div className={css.description}>{data.card.description}</div>
-
-      {data.card.text && (
-        <div
-          className={css.text}
-          dangerouslySetInnerHTML={{ __html: data.card.text }}
-        />
-      )}
     </Segment>
   );
 };

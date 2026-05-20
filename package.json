@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "formik": "^2.4.9",
-    "webapp": "^0.0.2"
+    "webapp": "^0.0.2",
+    "zod": "^3.25.76"
   }
 }

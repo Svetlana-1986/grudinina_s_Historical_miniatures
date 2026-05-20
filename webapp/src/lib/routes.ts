@@ -10,11 +10,11 @@ export const getMainCardPageRoute = () => '/';
 export const getAllCardsPageRoute = () => '/allcards';
 
 export const viewCardPageRouteParams = getRouteParams({
-  cardNick: true,
+  cardSlug: true,
 });
 export type ViewCardPageRouteParams = typeof viewCardPageRouteParams;
-export const getViewCardPageRoute = ({ cardNick }: ViewCardPageRouteParams) =>
-  `/cards/${cardNick}`;
+export const getViewCardPageRoute = ({ cardSlug }: ViewCardPageRouteParams) =>
+  `/cards/${cardSlug}`;
 
 export const getNewCardPageRoute = () => 'cards/new';
 
