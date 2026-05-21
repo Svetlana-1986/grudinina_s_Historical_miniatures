@@ -7,8 +7,15 @@ import { trpc } from '../../lib/trpc';
 import {
   zCreateCardTrpcInput,
   type CreateCardInput,
-} from '@miniaturenick/backend/src/router/createCard/input';
+} from '@miniaturenick/backend/createCard/input';
+import { useState } from 'react';
+
 export const NewCardPage = () => {
+  // для формы -успех
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+  // для формы с ошибкой
+  const [submittingError, setsubmittingError] = useState<string | null>(null);
+
   const createCard = trpc.createCard.useMutation();
   const formik = useFormik<CreateCardInput>({
     initialValues: {
@@ -21,7 +28,22 @@ export const NewCardPage = () => {
 
     validate: withZodSchema(zCreateCardTrpcInput),
     onSubmit: async (values) => {
-      await createCard.mutateAsync(values);
+      try {
+        await createCard.mutateAsync(values);
+        // сброс данных из формы до начального
+        formik.resetForm();
+        // делаем сообщение видимым
+        setSuccessMessageVisible(true);
+        // через 3 сек скрываем сообщение
+        setTimeout(() => {
+          setSuccessMessageVisible(false);
+        }, 3000);
+      } catch (error: any) {
+        setsubmittingError(error.message);
+        setTimeout(() => {
+          setsubmittingError(null);
+        }, 3000);
+      }
     },
   });
 
@@ -53,7 +75,17 @@ export const NewCardPage = () => {
           </div>
         )}
 
-        <button type="submit">Создать карточку</button>
+        {!!submittingError && (
+          <div style={{ color: 'red' }}>{submittingError}</div>
+        )}
+
+        {successMessageVisible && (
+          <div style={{ color: 'white' }}>Карточка создана!</div>
+        )}
+
+        <button type="submit" disabled={formik.isSubmitting}>
+          {formik.isSubmitting ? 'Загрузка...' : 'Создать карточку'}
+        </button>
       </form>
     </Segment>
   );

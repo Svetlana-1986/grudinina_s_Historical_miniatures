@@ -13,7 +13,9 @@ export const createCardTrpcRoute = trpc.procedure
       }) +
       '-' +
       Date.now();
-
+    if (cards.find((card) => card.title === input.title)) {
+      throw Error('Карточка с таким названием уже существует!');
+    }
     cards.unshift({
       ...input,
       slug,

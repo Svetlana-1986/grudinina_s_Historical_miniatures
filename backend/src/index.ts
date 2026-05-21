@@ -2,6 +2,7 @@ import express from 'express';
 import { trpcRouter } from './router';
 import { applyTrpcToExpressApp } from './lib/trpc';
 import cors from 'cors';
+export type { TrpcRouter } from './router';
 
 const expressApp = express();
 expressApp.use(cors());
