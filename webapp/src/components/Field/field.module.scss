@@ -1,0 +1,67 @@
+@use '../../styles/vars.scss' as vars;
+
+.field {
+  margin-bottom: 20px;
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: vars.$fontSizeMd;
+  font-weight: 600;
+  color: vars.$sandy;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid vars.$sandy;
+  border-radius: 6px;
+  background-color: vars.$beige;
+  color: vars.$brown;
+  font-size: vars.$fontSizeMd;
+  font-family: vars.$defaultFontFamily;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:focus {
+    border-color: vars.$beige;
+    box-shadow: 0 0 0 2px rgb(230 216 189 / 30%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.invalid {
+  border-color: vars.$red;
+}
+
+.error {
+  margin-top: 6px;
+  color: vars.$red;
+  font-size: vars.$fontSizeSm;
+}
+
+.sm {
+  max-width: 220px;
+}
+
+.md {
+  max-width: 420px;
+}
+
+.lg {
+  max-width: 700px;
+}
+
+.full {
+  width: 100%;
+}

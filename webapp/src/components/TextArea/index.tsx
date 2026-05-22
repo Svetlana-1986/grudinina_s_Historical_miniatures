@@ -1,34 +1,59 @@
 import type { FormikProps } from 'formik';
+import cn from 'classnames';
 
-export const TextArea = ({
+import baseCss from '../Field/field.module.scss';
+import css from './index.module.scss';
+
+type Props<T> = {
+  name: keyof T;
+  label: string;
+  formik: FormikProps<T>;
+  size?: 'sm' | 'md' | 'lg' | 'full';
+};
+
+export const TextArea = <T extends object>({
   name,
   label,
   formik,
-}: {
-  name: string;
-  label: string;
-  formik: FormikProps<any>;
-}) => {
-  const value = formik.values[name];
+  size = 'lg',
+}: Props<T>) => {
+  const value = formik.values[name] as string;
+
   const error = formik.errors[name] as string | undefined;
+
   const touched = formik.touched[name];
+
+  const invalid = !!touched && !!error;
+
+  const disabled = formik.isSubmitting;
+
   return (
-    <div style={{ marginBottom: 10 }}>
-      <label htmlFor={name}>{label}</label>
-      <br />
+    <div
+      className={cn(baseCss.field, {
+        [baseCss.disabled]: disabled,
+      })}
+    >
+      <label className={baseCss.label} htmlFor={String(name)}>
+        {label}
+      </label>
+
       <textarea
+        className={cn(baseCss.input, baseCss[size], css.textarea, {
+          [baseCss.invalid]: invalid,
+        })}
         onChange={(e) => {
-          void formik.setFieldValue(name, e.target.value);
+          void formik.setFieldValue(String(name), e.target.value);
         }}
         onBlur={() => {
-          void formik.setFieldTouched(name);
+          void formik.setFieldTouched(String(name));
         }}
         value={value}
-        name={name}
-        id={name}
-        disabled={formik.isSubmitting}
+        name={String(name)}
+        id={String(name)}
+        disabled={disabled}
       />
-      {!!touched && !!error && <div style={{ color: 'red' }}>{error}</div>}
+
+      {invalid && <div className={baseCss.error}>{error}</div>}
     </div>
   );
 };
