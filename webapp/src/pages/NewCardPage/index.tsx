@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { Segment } from '../../components/Segment';
 import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextArea';
+import { Alert } from '../../components/Alert';
 import { withZodSchema } from 'formik-validator-zod';
 import { trpc } from '../../lib/trpc';
 import {
@@ -9,12 +10,14 @@ import {
   type CreateCardInput,
 } from '@miniaturenick/backend/createCard/input';
 import { useState } from 'react';
+import { Button } from '../../components/Button';
+import { FormItems } from '../../components/FormItems';
 
 export const NewCardPage = () => {
   // для формы -успех
   const [successMessageVisible, setSuccessMessageVisible] = useState(false);
   // для формы с ошибкой
-  const [submittingError, setsubmittingError] = useState<string | null>(null);
+  const [submittingError, setSubmittingError] = useState<string | null>(null);
 
   const createCard = trpc.createCard.useMutation();
   const formik = useFormik<CreateCardInput>({
@@ -29,6 +32,7 @@ export const NewCardPage = () => {
     validate: withZodSchema(zCreateCardTrpcInput),
     onSubmit: async (values) => {
       try {
+        setSubmittingError(null);
         await createCard.mutateAsync(values);
         // сброс данных из формы до начального
         formik.resetForm();
@@ -38,10 +42,12 @@ export const NewCardPage = () => {
         setTimeout(() => {
           setSuccessMessageVisible(false);
         }, 3000);
-      } catch (error: any) {
-        setsubmittingError(error.message);
+      } catch (error) {
+        setSubmittingError(
+          error instanceof Error ? error.message : 'Произошла ошибка',
+        );
         setTimeout(() => {
-          setsubmittingError(null);
+          setSubmittingError(null);
         }, 3000);
       }
     },
@@ -49,43 +55,32 @@ export const NewCardPage = () => {
 
   return (
     <Segment title="Создать карточку">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          formik.handleSubmit();
-        }}
-      >
-        <Input name="title" label="Название" formik={formik} />
+      <form onSubmit={formik.handleSubmit}>
+        <FormItems>
+          <Input name="title" label="Название" formik={formik} />
 
-        <Input name="historicalPeriod" label="Период" formik={formik} />
+          <Input name="historicalPeriod" label="Период" formik={formik} />
 
-        <Input name="authorNick" label="Nick автора" formik={formik} />
+          <Input name="authorNick" label="Nick автора" formik={formik} />
 
-        <Input name="authorName" label="Имя автора" formik={formik} />
+          <Input name="authorName" label="Имя автора" formik={formik} />
 
-        <TextArea
-          name="description"
-          label="Описание миниатюры"
-          formik={formik}
-        />
+          <TextArea
+            name="description"
+            label="Описание миниатюры"
+            formik={formik}
+          />
 
-        {!formik.isValid && !!formik.submitCount && (
-          <div style={{ color: 'red' }}>
-            Некоторые поля заполнены некорректно
-          </div>
-        )}
+          {!!submittingError && <Alert type="error">{submittingError}</Alert>}
 
-        {!!submittingError && (
-          <div style={{ color: 'red' }}>{submittingError}</div>
-        )}
+          {successMessageVisible && (
+            <Alert type="success">Карточка создана!</Alert>
+          )}
 
-        {successMessageVisible && (
-          <div style={{ color: 'white' }}>Карточка создана!</div>
-        )}
-
-        <button type="submit" disabled={formik.isSubmitting}>
-          {formik.isSubmitting ? 'Загрузка...' : 'Создать карточку'}
-        </button>
+          <Button type="submit" loading={formik.isSubmitting}>
+            Создать карточку
+          </Button>
+        </FormItems>
       </form>
     </Segment>
   );

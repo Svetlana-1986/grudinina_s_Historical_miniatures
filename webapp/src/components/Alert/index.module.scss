@@ -1,0 +1,27 @@
+@use '../../styles/vars.scss' as vars;
+
+.alert {
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  margin-top: vars.$spacingMd;
+  border-radius: vars.$borderRadiusMedium;
+  font-size: vars.$fontSizeMd;
+  line-height: 1.5;
+  font-weight: 500;
+  border: 1px solid transparent;
+  animation: fadeIn 0.2s ease;
+}
+
+.error {
+  background-color: vars.$errorBg;
+  border-color: vars.$errorBorder;
+  color: vars.$errorText;
+}
+
+.success {
+  background-color: vars.$successBg;
+  border-color: vars.$successBorder;
+  color: vars.$successText;
+}

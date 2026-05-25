@@ -1,30 +1,85 @@
 @use '../../styles/vars.scss' as vars;
-@use '../../styles/mixins.scss' as css;
+@use '../../styles/mixins.scss' as mixins;
 
 .cards {
-  .card {
-    padding: 20px;
-    border: 1px solid vars.$sandy;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacingLg;
+}
 
-    & + .card {
-      margin-top: 20px;
-    }
+.card {
+  padding: vars.$spacingLg;
+  border: 1px solid rgb(209 180 106 / 20%);
+  border-radius: vars.$borderRadiusMedium;
+  background: linear-gradient(
+    180deg,
+    rgb(59 44 44 / 95%) 0%,
+    rgb(42 32 32 / 100%) 100%
+  );
+  box-shadow:
+    0 4px 14px rgb(0 0 0 / 25%),
+    inset 0 1px 0 rgb(255 255 255 / 4%);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 
-    .cardLink {
-      @include css.link;
-    }
-
-    .cardMeta {
-      font-size: vars.$fontSizeMd;
-
-      & + .cardMeta {
-        margin-top: 2px;
-      }
-    }
-
-    .cardDescription {
-      font-size: vars.$fontSizeMd;
-    }
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgb(209 180 106 / 45%);
+    box-shadow:
+      0 10px 24px rgb(0 0 0 / 35%),
+      0 0 0 1px rgb(209 180 106 / 10%);
   }
 }
+
+.cardLink {
+  @include mixins.link;
+
+  display: inline-block;
+  margin-bottom: vars.$spacingMd;
+  font-size: vars.$fontSizeXl;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cardMeta {
+  color: vars.$textMuted;
+  font-size: vars.$fontSizeMd;
+  line-height: 1.5;
+
+  & + .cardMeta {
+    margin-top: vars.$spacingXs;
+  }
+}
+
+// @use '../../styles/vars.scss' as vars;
+// @use '../../styles/mixins.scss' as css;
+
+// .cards {
+//   .card {
+//     padding: 20px;
+//     border: 1px solid vars.$sandy;
+//     border-radius: 10px;
+
+//     & + .card {
+//       margin-top: 20px;
+//     }
+
+//     .cardLink {
+//       @include css.link;
+//     }
+
+//     .cardMeta {
+//       font-size: vars.$fontSizeMd;
+
+//       & + .cardMeta {
+//         margin-top: 2px;
+//       }
+//     }
+
+//     .cardDescription {
+//       font-size: vars.$fontSizeMd;
+//     }
+//   }
+// }

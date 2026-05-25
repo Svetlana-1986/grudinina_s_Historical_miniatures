@@ -1,6 +1,6 @@
 @use './vars' as *;
 
-@mixin link($color: $sandy, $hoverColor: $beige) {
+@mixin link($color: $textPrimary, $hoverColor: $sandy) {
   color: $color;
   transition: color 200ms ease;
 
@@ -12,11 +12,17 @@
 }
 
 @mixin h1 {
-  font-size: 20px;
-  font-weight: bold;
+  font-family: $titleFontFamily;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: $textPrimary;
 }
 
 @mixin h2 {
-  font-size: 18px;
-  font-weight: bold;
+  font-family: $titleFontFamily;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $textPrimary;
 }

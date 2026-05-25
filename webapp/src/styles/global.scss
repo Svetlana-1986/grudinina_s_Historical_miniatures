@@ -10,11 +10,11 @@ body,
 }
 
 body {
-  font-family: $defaultFontFamily;
+  font-family: $defaultFontFamily;;
   font-size: $fontSizeSm;
   line-height: $defaultLineHeight;
-  background: $defaultBackgroundColor;
-  color: $defaultTextColor;
+  background-color: $backgroundPrimary;
+  color: $textPrimary;
 }
 
 *,

@@ -37,13 +37,9 @@ export const Input = <T extends object>({
       </label>
 
       <input
-        className={cn(
-          css.input,
-          css[size],
-          {
-            [css.invalid]: invalid,
-          },
-        )}
+        className={cn(css.input, css[size], {
+          [css.invalid]: invalid,
+        })}
         type="text"
         onChange={(e) => {
           void formik.setFieldValue(String(name), e.target.value);

@@ -1,0 +1,10 @@
+@use '../../styles/vars.scss' as vars;
+
+.formItems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: vars.$spacingLg;
+  width: 100%;
+  max-width: 720px;
+}

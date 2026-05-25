@@ -1,65 +1,74 @@
 @use '../../styles/vars.scss' as vars;
 
 .field {
-  margin-bottom: 20px;
+  margin-bottom: vars.$spacingLg;
 
   &.disabled {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
 .label {
   display: block;
-  margin-bottom: 6px;
-  font-size: vars.$fontSizeMd;
-  font-weight: 600;
-  color: vars.$sandy;
+  margin-bottom: vars.$spacingSm;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeXl;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .input {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid vars.$sandy;
-  border-radius: 6px;
-  background-color: vars.$beige;
-  color: vars.$brown;
-  font-size: vars.$fontSizeMd;
+  padding: 12px 14px;
+  border: 1px solid vars.$textMuted;
+  border-radius: vars.$borderRadiusSmall;
+  background-color: vars.$paper;
+  color: vars.$backgroundPrimary;
+  font-size: vars.$fontSizeXl;
   font-family: vars.$defaultFontFamily;
+  line-height: 1.5;
   outline: none;
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 
   &:focus {
-    border-color: vars.$beige;
-    box-shadow: 0 0 0 2px rgb(230 216 189 / 30%);
+    border-color: vars.$textPrimary;
+    box-shadow: 0 0 0 3px rgb(212 176 106 / 20%);
   }
 
   &:disabled {
     cursor: not-allowed;
   }
+
+  &::placeholder {
+    color: #8f8373;
+  }
 }
 
 .invalid {
-  border-color: vars.$red;
+  border-color: vars.$error;
 }
 
 .error {
-  margin-top: 6px;
-  color: vars.$red;
+  margin-top: vars.$spacingSm;
+  color: #f0c7c7;
   font-size: vars.$fontSizeSm;
+  line-height: 1.4;
 }
 
 .sm {
-  max-width: 220px;
+  width: 220px;
 }
 
 .md {
-  max-width: 420px;
+  width: 420px;
 }
 
 .lg {
-  max-width: 700px;
+  width: 700px;
+  max-width: 100%;
 }
 
 .full {

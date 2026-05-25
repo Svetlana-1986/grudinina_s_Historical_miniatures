@@ -1,0 +1,53 @@
+@use '../../styles/vars.scss' as vars;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 12px 20px;
+  border: 1px solid vars.$sandy;
+  border-radius: vars.$borderRadiusMedium;
+  background: linear-gradient(180deg, #4a382d 0%, #352821 100%);
+  color: vars.$textPrimary;
+  font-family: vars.$titleFontFamily;
+  font-size: vars.$fontSizeLg;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow:
+    0 4px 12px rgb(0 0 0 / 25%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
+
+  &:hover:not(:disabled) {
+    border-color: #e2c98a;
+    background: linear-gradient(180deg, #5a4334 0%, #3f3027 100%);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow:
+      0 2px 6px rgb(0 0 0 / 20%),
+      inset 0 2px 3px rgb(0 0 0 / 25%);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgb(209 180 106 / 30%),
+      0 4px 12px rgb(0 0 0 / 25%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.loading {
+  opacity: 0.7;
+}
