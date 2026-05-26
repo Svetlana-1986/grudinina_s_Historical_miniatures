@@ -4,14 +4,14 @@ import cn from 'classnames';
 import baseCss from '../Field/field.module.scss';
 import css from './index.module.scss';
 
-type Props<T> = {
+type Props<T extends Record<string, unknown>> = {
   name: keyof T;
   label: string;
   formik: FormikProps<T>;
   size?: 'sm' | 'md' | 'lg' | 'full';
 };
 
-export const TextArea = <T extends object>({
+export const TextArea = <T extends Record<string, unknown>>({
   name,
   label,
   formik,

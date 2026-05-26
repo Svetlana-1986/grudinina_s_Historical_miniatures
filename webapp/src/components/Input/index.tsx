@@ -3,14 +3,14 @@ import cn from 'classnames';
 
 import css from '../Field/field.module.scss';
 
-type Props<T> = {
+type Props<T extends Record<string, unknown>> = {
   name: keyof T;
   label: string;
   formik: FormikProps<T>;
   size?: 'sm' | 'md' | 'lg' | 'full';
 };
 
-export const Input = <T extends object>({
+export const Input = <T extends Record<string, unknown>>({
   name,
   label,
   formik,

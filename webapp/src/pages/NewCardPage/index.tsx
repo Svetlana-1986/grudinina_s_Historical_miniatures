@@ -57,15 +57,31 @@ export const NewCardPage = () => {
     <Segment title="Создать карточку">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
-          <Input name="title" label="Название" formik={formik} />
+          <Input<CreateCardInput>
+            name="title"
+            label="Название"
+            formik={formik}
+          />
 
-          <Input name="historicalPeriod" label="Период" formik={formik} />
+          <Input<CreateCardInput>
+            name="historicalPeriod"
+            label="Период"
+            formik={formik}
+          />
 
-          <Input name="authorNick" label="Nick автора" formik={formik} />
+          <Input<CreateCardInput>
+            name="authorNick"
+            label="Nick автора"
+            formik={formik}
+          />
 
-          <Input name="authorName" label="Имя автора" formik={formik} />
+          <Input<CreateCardInput>
+            name="authorName"
+            label="Имя автора"
+            formik={formik}
+          />
 
-          <TextArea
+          <TextArea<CreateCardInput>
             name="description"
             label="Описание миниатюры"
             formik={formik}
