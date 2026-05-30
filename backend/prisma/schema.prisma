@@ -8,6 +8,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id             String   @id @default(uuid())
+  nick           String   @unique
+  passwordHash   String
+  createdAt      DateTime @default(now())
+}
+
+
+
+
 model Card {
   id               String @id @default(uuid())
   slug             String @unique
