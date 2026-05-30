@@ -4,7 +4,7 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 
 import type { AnyRouter } from '@trpc/server';
 
-import type { AppContext } from './ctx';
+import type { AppContext } from './ctx.js';
 
 export const applyTrpcToExpressApp = (
   app: express.Express,

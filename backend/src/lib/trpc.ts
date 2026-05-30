@@ -1,4 +1,9 @@
 import { initTRPC } from '@trpc/server';
-import type { AppContext } from './ctx';
 
-export const trpc = initTRPC.context<AppContext>().create();
+import superjson from 'superjson';
+
+import type { AppContext } from './ctx.js';
+
+export const trpc = initTRPC.context<AppContext>().create({
+  transformer: superjson,
+});

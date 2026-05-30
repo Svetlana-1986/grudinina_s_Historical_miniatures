@@ -3,32 +3,43 @@
     "files": true,
     "transpileOnly": true
   },
+
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
 
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "target": "ES2021",
 
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "lib": ["ES2021"],
+
+    "types": ["node"],
+
     "strict": true,
 
+    "noImplicitAny": true,
+
+    "forceConsistentCasingInFileNames": true,
+
+    "noFallthroughCasesInSwitch": true,
+
     "skipLibCheck": true,
+
     "sourceMap": true,
+
     "inlineSources": true,
 
     "resolveJsonModule": true,
-    "isolatedModules": false,
 
-    "lib": ["ES2021"],
-    "target": "ES2021",
-    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
 
-    "module": "Node16",
-    "moduleResolution": "node16"
+    "esModuleInterop": true,
+    
+    "declaration": true,
+    "declarationMap": true
   },
+
   "include": ["src"]
 }

@@ -1,37 +1,53 @@
 import { useParams } from 'react-router-dom';
+
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
+
 import { type ViewCardPageRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
+
 import css from './index.module.scss';
+
 import { Segment } from '../../components/Segment';
 
 export const ViewCardPage = () => {
-  const { cardSlug } = useParams() as ViewCardPageRouteParams;
-  // получение card с backend
-  const { data, error, isLoading, isFetching, isError } = trpc.getCard.useQuery(
+  const params = useParams<ViewCardPageRouteParams>();
+  const cardSlug = params.cardSlug;
+
+  if (!cardSlug) {
+    return <span>Invalid route</span>;
+  }
+
+  const { data, error, isLoading } = trpc.getCard.useQuery(
     { cardSlug },
+    { enabled: !!cardSlug },
   );
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (error) {
+    return <span>Ошибка загрузки карточки</span>;
   }
 
-  if (!data || !data.card) {
+  if (!data?.card) {
     return <span>Cards not found</span>;
   }
+
+  const formattedDate = format(data.card.createdAt, 'dd.MM.yyyy', {
+    locale: ru,
+  });
 
   return (
     <Segment title={data.card.title}>
       <div className={css.meta}>
         <p className={css.metaItem}>Период: {data.card.historicalPeriod}</p>
-
         <p className={css.metaItem}>Nick автора: {data.card.authorNick}</p>
-
         <p className={css.metaItem}>Имя автора: {data.card.authorName}</p>
       </div>
+
+      <div className={css.createdAt}>Дата создания: {formattedDate}</div>
 
       <div className={css.description}>{data.card.description}</div>
     </Segment>

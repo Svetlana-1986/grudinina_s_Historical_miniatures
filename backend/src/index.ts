@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 
-import { trpcRouter } from './router';
-import { applyTrpcToExpressApp } from './lib/trpcExpress';
-import { createAppContext } from './lib/ctx';
+import { trpcRouter } from './router/index.js';
+import { applyTrpcToExpressApp } from './lib/trpcExpress.js';
+import { createAppContext } from './lib/ctx.js';
 
-export type { TrpcRouter } from './router';
+export type { TrpcRouter } from './router/index.js';
 
 const bootstrap = async () => {
   const app = express();

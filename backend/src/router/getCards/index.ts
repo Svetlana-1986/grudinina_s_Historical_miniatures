@@ -1,6 +1,4 @@
-// import _ from 'lodash';
-// import { cards } from '../../lib/cards';
-import { trpc } from '../../lib/trpc';
+import { trpc } from '../../lib/trpc.js';
 
 export const getCardsTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
   const cards = await ctx.prisma.card.findMany({
@@ -12,23 +10,15 @@ export const getCardsTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
       authorNick: true,
       authorName: true,
       description: true,
+      createdAt: true,
     },
+
+    orderBy: {
+      createdAt: 'desc',
+    },
+
+    take: 20,
   });
-  return {cards}
-})
 
-
-  // покажет только эти строки
-  // return {
-  //   cards: cards.map((card) =>
-  //     _.pick(card, [
-  //       'slug',
-  //       'title',
-  //       'historicalPeriod',
-  //       'authorNick',
-  //       'authorName',
-  //       'description',
-  //     ]),
-  //   ),
-  // };
-
+  return { cards };
+});

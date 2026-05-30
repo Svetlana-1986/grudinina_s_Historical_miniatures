@@ -1,28 +1,31 @@
 @use '../../styles/vars.scss' as vars;
 
 .meta {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .metaItem {
-  font-size: vars.$fontSizeMd;
-  opacity: 0.8;
+  font-size: vars.$fontSizeXl;
+  color: vars.$textMuted;
   line-height: 1.5;
 
   & + .metaItem {
-    margin-top: 6px;
+    margin-top: 4px;
   }
 }
 
-.description {
-  font-size: vars.$fontSizeLg;
-  line-height: 1.6;
-  margin-bottom: 30px;
+.createdAt {
+  font-size: vars.$fontSizeXl;
+  color: vars.$textMuted;
+  margin-bottom: 18px;
 }
 
-
+.description {
+  font-size: vars.$fontSizeXl;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
 
 .text {
   line-height: 1.7;
 }
-

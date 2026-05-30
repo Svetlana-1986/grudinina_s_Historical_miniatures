@@ -1,8 +1,6 @@
-import { cards, type Card } from '../../lib/cards';
+import { trpc } from '../../lib/trpc.js';
 
-import { trpc } from '../../lib/trpc';
-
-import { zCreateCardTrpcInput } from './input';
+import { zCreateCardTrpcInput } from './input.js';
 
 import { randomUUID } from 'crypto';
 
@@ -10,20 +8,35 @@ import { slugify } from 'transliteration';
 
 export const createCardTrpcRoute = trpc.procedure
   .input(zCreateCardTrpcInput)
-  .mutation(({ input }) => {
-    const validatedInput = zCreateCardTrpcInput.parse(input) as Card;
-
-    const slug = `${slugify(validatedInput.title, {
+  .mutation(async ({ input, ctx }) => {
+    // Генерация slug
+    const slug = `${slugify(input.title, {
       lowercase: true,
       separator: '-',
     })}-${randomUUID().split('-')[0]}`;
 
-    const newCard: Card = {
-      ...validatedInput,
-      slug,
-    };
+    // Проверка существования slug
+    const existingCard = await ctx.prisma.card.findUnique({
+      where: {
+        slug,
+      },
+    });
 
-    cards.unshift(newCard);
+    if (existingCard) {
+      throw new Error('Карточка уже существует');
+    }
 
-    return true;
+    // Создание записи
+    const createdCard = await ctx.prisma.card.create({
+      data: {
+        slug,
+        title: input.title,
+        historicalPeriod: input.historicalPeriod,
+        authorNick: input.authorNick,
+        authorName: input.authorName,
+        description: input.description,
+      },
+    });
+
+    return createdCard;
   });

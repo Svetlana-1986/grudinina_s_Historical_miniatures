@@ -16,5 +16,6 @@ model Card {
   authorNick       String
   authorName       String
   description      String
+  createdAt        DateTime @default(now())
 }
 
