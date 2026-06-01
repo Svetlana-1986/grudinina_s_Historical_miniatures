@@ -1,8 +1,9 @@
 import { trpc } from '../lib/trpc.js';
 // @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TrpcRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
-import { createCardTrpcRoute } from './createCard/index.js'
-import { getCardTrpcRoute } from './getCard/index.js'
-import { getCardsTrpcRoute } from './getCards/index.js'
+import { createCardTrpcRoute } from './createCard/index.js';
+import { getCardTrpcRoute } from './getCard/index.js';
+import { getCardsTrpcRoute } from './getCards/index.js';
+import { signUpTrpcRoute } from './signUp/index.js';
 // @endindex
 
 export const trpcRouter = trpc.router({
@@ -10,6 +11,7 @@ export const trpcRouter = trpc.router({
   createCard: createCardTrpcRoute,
   getCard: getCardTrpcRoute,
   getCards: getCardsTrpcRoute,
+  signUp: signUpTrpcRoute,
   // @endindex
 });
 

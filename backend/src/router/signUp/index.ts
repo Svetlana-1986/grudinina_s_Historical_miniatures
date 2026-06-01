@@ -1,21 +1,36 @@
-import crypto from 'crypto'
-import { trpc } from '../../lib/trpc.js'
-import { zSignUpTrpcInput } from './input.js'
+import bcrypt from 'bcrypt';
+import { TRPCError } from '@trpc/server';
 
-export const signUpTrpcRoute = trpc.procedure.input(zSignUpTrpcInput).mutation(async ({ ctx, input }) => {
-  const exUser = await ctx.prisma.user.findUnique({
-    where: {
-      nick: input.nick,
-    },
-  })
-  if (exUser) {
-    throw new Error('User with this nick already exists')
-  }
-  await ctx.prisma.user.create({
-    data: {
-      nick: input.nick,
-      passwordHash: crypto.createHash('sha256').update(input.password).digest('hex'),
-    },
-  })
-  return true
-})
+import { trpc } from '../../lib/trpc.js';
+import { zSignUpTrpcInput } from './input.js';
+
+export const signUpTrpcRoute = trpc.procedure
+  .input(zSignUpTrpcInput)
+  .mutation(async ({ ctx, input }) => {
+    const existingUser = await ctx.prisma.user.findUnique({
+      where: {
+        nick: input.nick,
+      },
+    });
+
+    if (existingUser) {
+      throw new TRPCError({
+        code: 'CONFLICT',
+        message: 'Пользователь с таким именем уже существует',
+      });
+    }
+
+    const passwordHash = await bcrypt.hash(input.password, 10);
+
+    const user = await ctx.prisma.user.create({
+      data: {
+        nick: input.nick,
+        passwordHash,
+      },
+    });
+
+    return {
+      success: true,
+      userId: user.id,
+    };
+  });

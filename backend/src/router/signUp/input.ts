@@ -3,10 +3,15 @@ import { z } from 'zod';
 export const zSignUpTrpcInput = z.object({
   nick: z
     .string()
-    .min(1)
+    .min(3)
+    .max(30)
     .regex(
       /^[a-z0-9-]+$/,
       'Nick автора может содержать только строчные латинские буквы, цифры и дефис',
     ),
-  password: z.string().min(1),
+  password: z
+    .string()
+    .min(8)
+    .regex(/[A-Z]/, 'Нужна заглавная буква')
+    .regex(/[0-9]/, 'Нужна цифра'),
 });
