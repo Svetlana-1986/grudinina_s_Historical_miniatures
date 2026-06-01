@@ -3,6 +3,7 @@ import { trpc } from '../lib/trpc.js';
 import { createCardTrpcRoute } from './createCard/index.js';
 import { getCardTrpcRoute } from './getCard/index.js';
 import { getCardsTrpcRoute } from './getCards/index.js';
+import { signInTrpcRoute } from './signIn/index.js';
 import { signUpTrpcRoute } from './signUp/index.js';
 // @endindex
 
@@ -11,6 +12,7 @@ export const trpcRouter = trpc.router({
   createCard: createCardTrpcRoute,
   getCard: getCardTrpcRoute,
   getCards: getCardsTrpcRoute,
+  signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
   // @endindex
 });

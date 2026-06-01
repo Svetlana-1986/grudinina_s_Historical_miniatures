@@ -18,9 +18,9 @@ export const getViewCardPageRoute = ({ cardSlug }: ViewCardPageRouteParams) =>
 
 export const getNewCardPageRoute = () => 'cards/new';
 
-export const getForumPage = () => 'cards/forum';
+export const getForumRoutePage = () => '/forum';
 
-export const getRegistrationPage = () => 'cards/registration'
+export const getSighUpRoutePage = () => '/sigh-up';
 
 // export const viewCardPageRouteParams = { cardNick: ':cardNick' };
 // export type ViewCardPageRouteParams = { cardNick: string };

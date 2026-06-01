@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt';
 import { TRPCError } from '@trpc/server';
 
 import { trpc } from '../../lib/trpc.js';
 import { zSignUpTrpcInput } from './input.js';
+import { hashPassword } from '../../utils/password.js';
 
 export const signUpTrpcRoute = trpc.procedure
   .input(zSignUpTrpcInput)
@@ -20,7 +20,8 @@ export const signUpTrpcRoute = trpc.procedure
       });
     }
 
-    const passwordHash = await bcrypt.hash(input.password, 10);
+    // const passwordHash = await bcrypt.hash(input.password, 10);
+    const passwordHash = await hashPassword(input.password);
 
     const user = await ctx.prisma.user.create({
       data: {

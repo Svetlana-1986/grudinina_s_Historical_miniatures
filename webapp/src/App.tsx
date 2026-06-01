@@ -1,19 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import * as routes from './lib/routes';
-// import {
-//   getMainCardPageRoute,
-//   getAllCardsPageRoute,
-//   getViewCardPageRoute,
-//   viewCardPageRouteParams,
-// } from './lib/routes';
 import { TrpcProvider } from './lib/trpc';
 import { MainCardPage } from './pages/MainCardPage';
 import { AllCardsPage } from './pages/AllCardsPage';
 import { ViewCardPage } from './pages/ViewCardPage';
 import { NewCardPage } from './pages/NewCardPage';
 import { ForumPage } from './pages/ForumPage';
-import { RegistrationPage } from './pages/RegistrationPage';
+import { SignUpPage } from './pages/SighUpPage';
 
 import './styles/global.scss';
 
@@ -41,10 +35,10 @@ export const App = () => {
               path={routes.getNewCardPageRoute()}
               element={<NewCardPage />}
             />
-            <Route path={routes.getForumPage()} element={<ForumPage />} />
+            <Route path={routes.getForumRoutePage()} element={<ForumPage />} />
             <Route
-              path={routes.getRegistrationPage()}
-              element={<RegistrationPage />}
+              path={routes.getSighUpRoutePage()}
+              element={<SignUpPage />}
             />
           </Route>
         </Routes>

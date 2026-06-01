@@ -5,8 +5,8 @@ import {
   getAllCardsPageRoute,
   getMainCardPageRoute,
   getNewCardPageRoute,
-  getForumPage,
-  getRegistrationPage,
+  getForumRoutePage,
+  getSighUpRoutePage,
 } from '../../lib/routes';
 import css from './index.module.scss';
 
@@ -23,7 +23,7 @@ export const Layout = () => {
           </li>
           <li className={css.item}>
             <Link className={css.link} to={getAllCardsPageRoute()}>
-              Все миниатюры
+              Галерея
             </Link>
           </li>
           <li className={css.item}>
@@ -32,12 +32,12 @@ export const Layout = () => {
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getForumPage()}>
+            <Link className={css.link} to={getForumRoutePage()}>
               Форум
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getRegistrationPage()}>
+            <Link className={css.link} to={getSighUpRoutePage()}>
               Регистрация
             </Link>
           </li>

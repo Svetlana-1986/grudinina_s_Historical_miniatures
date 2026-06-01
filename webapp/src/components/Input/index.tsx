@@ -7,6 +7,7 @@ type Props<T extends Record<string, unknown>> = {
   name: keyof T;
   label: string;
   formik: FormikProps<T>;
+  type?: 'text' | 'password';
   size?: 'sm' | 'md' | 'lg' | 'full';
 };
 
@@ -14,6 +15,7 @@ export const Input = <T extends Record<string, unknown>>({
   name,
   label,
   formik,
+  type = 'text',
   size = 'md',
 }: Props<T>) => {
   const value = formik.values[name] as string;
@@ -40,7 +42,7 @@ export const Input = <T extends Record<string, unknown>>({
         className={cn(css.input, css[size], {
           [css.invalid]: invalid,
         })}
-        type="text"
+        type={type}
         onChange={(e) => {
           void formik.setFieldValue(String(name), e.target.value);
         }}

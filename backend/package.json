@@ -49,6 +49,10 @@
     "./createCard/input": {
       "types": "./dist/router/createCard/input.d.ts",
       "default": "./dist/router/createCard/input.js"
+    },
+    "./signUp/input": {
+      "types": "./dist/router/signUp/input.d.ts",
+      "default": "./dist/router/signUp/input.js"
     }
   }
 }
