@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
+
 import { trpc } from '../../lib/trpc.js';
 
 export const getCardTrpcRoute = trpc.procedure
@@ -15,6 +16,10 @@ export const getCardTrpcRoute = trpc.procedure
     const card = await ctx.prisma.card.findUnique({
       where: {
         slug: input.cardSlug,
+      },
+
+      include: {
+        author: true,
       },
     });
 

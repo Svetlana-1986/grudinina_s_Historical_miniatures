@@ -43,8 +43,8 @@ export const ViewCardPage = () => {
     <Segment title={data.card.title}>
       <div className={css.meta}>
         <p className={css.metaItem}>Период: {data.card.historicalPeriod}</p>
-        <p className={css.metaItem}>Nick автора: {data.card.authorNick}</p>
-        <p className={css.metaItem}>Имя автора: {data.card.authorName}</p>
+        <p className={css.metaItem}>Nick автора: {data.card.author?.nick}</p>
+        <p className={css.metaItem}>Имя автора: {data.card.author?.displayName}</p>
       </div>
 
       <div className={css.createdAt}>Дата создания: {formattedDate}</div>

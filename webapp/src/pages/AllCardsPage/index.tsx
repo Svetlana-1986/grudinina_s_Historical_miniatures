@@ -21,7 +21,7 @@ export const AllCardsPage = () => {
   }
 
   return (
-    <Segment title="Все миниатюры">
+    <Segment title="Галерея">
       <div className={css.cards}>
         {data.cards.map((card) => (
           <div className={css.card} key={card.slug}>
@@ -38,9 +38,9 @@ export const AllCardsPage = () => {
             >
               <p className={css.cardMeta}>Период: {card.historicalPeriod}</p>
 
-              <p className={css.cardMeta}>Nick автора: {card.authorNick}</p>
+              <p className={css.cardMeta}>Nick автора: {card.author?.nick}</p>
 
-              <p className={css.cardMeta}>Имя автора: {card.authorName}</p>
+              <p className={css.cardMeta}>Имя автора: {card.author?.displayName}</p>
             </Segment>
           </div>
         ))}

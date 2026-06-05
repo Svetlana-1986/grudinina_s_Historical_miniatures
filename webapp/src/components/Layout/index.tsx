@@ -5,8 +5,9 @@ import {
   getAllCardsPageRoute,
   getMainCardPageRoute,
   getNewCardPageRoute,
-  getForumRoutePage,
-  getSighUpRoutePage,
+  getBlogRoutePage,
+  getSignUpRoutePage,
+  getSignInRoutePage,
 } from '../../lib/routes';
 import css from './index.module.scss';
 
@@ -32,13 +33,18 @@ export const Layout = () => {
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getForumRoutePage()}>
-              Форум
+            <Link className={css.link} to={getBlogRoutePage()}>
+              Блог
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={getSighUpRoutePage()}>
+            <Link className={css.link} to={getSignUpRoutePage()}>
               Регистрация
+            </Link>
+          </li>
+          <li className={css.item}>
+            <Link className={css.link} to={getSignInRoutePage()}>
+              Войти
             </Link>
           </li>
         </ul>

@@ -1,21 +1,19 @@
-import { trpc } from '../../lib/trpc.js';
-
 import { zCreateCardTrpcInput } from './input.js';
+
+import { protectedProcedure } from '../../lib/protectedProcedure.js';
 
 import { randomUUID } from 'crypto';
 
 import { slugify } from 'transliteration';
 
-export const createCardTrpcRoute = trpc.procedure
+export const createCardTrpcRoute = protectedProcedure
   .input(zCreateCardTrpcInput)
   .mutation(async ({ input, ctx }) => {
-    // Генерация slug
     const slug = `${slugify(input.title, {
       lowercase: true,
       separator: '-',
     })}-${randomUUID().split('-')[0]}`;
 
-    // Проверка существования slug
     const existingCard = await ctx.prisma.card.findUnique({
       where: {
         slug,
@@ -26,15 +24,19 @@ export const createCardTrpcRoute = trpc.procedure
       throw new Error('Карточка уже существует');
     }
 
-    // Создание записи
+    const currentUser = ctx.user;
+
     const createdCard = await ctx.prisma.card.create({
       data: {
         slug,
+
         title: input.title,
+
         historicalPeriod: input.historicalPeriod,
-        authorNick: input.authorNick,
-        authorName: input.authorName,
+
         description: input.description,
+
+        authorId: currentUser.id,
       },
     });
 

@@ -25,6 +25,14 @@ const trpcClient = trpc.createClient({
       url: import.meta.env.VITE_API_URL,
 
       transformer: superjson,
+
+      fetch(url, options) {
+        return fetch(url, {
+          ...options,
+
+          credentials: 'include',
+        });
+      },
     }),
   ],
 });

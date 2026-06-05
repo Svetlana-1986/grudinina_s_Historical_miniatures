@@ -20,12 +20,12 @@ export const signUpTrpcRoute = trpc.procedure
       });
     }
 
-    // const passwordHash = await bcrypt.hash(input.password, 10);
     const passwordHash = await hashPassword(input.password);
 
     const user = await ctx.prisma.user.create({
       data: {
         nick: input.nick,
+        displayName: input.displayName,
         passwordHash,
       },
     });

@@ -1,10 +1,10 @@
-// import bcrypt from 'bcrypt';
-
 import { verifyPassword } from '../../utils/password.js';
 
 import { trpc } from '../../lib/trpc.js';
 
 import { zSignInTrpcInput } from './input.js';
+
+import { generateSessionToken } from '../../utils/generateSessionToken.js';
 
 export const signInTrpcRoute = trpc.procedure
   .input(zSignInTrpcInput)
@@ -19,11 +19,6 @@ export const signInTrpcRoute = trpc.procedure
       throw new Error('Неверный логин или пароль');
     }
 
-    // const passwordMatches = await bcrypt.compare(
-    //   input.password,
-    //   user.passwordHash,
-    // );
-
     const passwordMatches = await verifyPassword(
       input.password,
       user.passwordHash,
@@ -32,6 +27,28 @@ export const signInTrpcRoute = trpc.procedure
     if (!passwordMatches) {
       throw new Error('Неверный логин или пароль');
     }
+
+    const sessionToken = generateSessionToken();
+
+    await ctx.prisma.session.create({
+      data: {
+        token: sessionToken,
+
+        userId: user.id,
+
+        expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      },
+    });
+
+    ctx.res.cookie('sessionToken', sessionToken, {
+      httpOnly: true,
+
+      secure: false,
+
+      sameSite: 'lax',
+
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+    });
 
     return {
       success: true,

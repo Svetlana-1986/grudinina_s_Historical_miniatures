@@ -43,6 +43,7 @@ export const SignUpPage = () => {
   const formik = useFormik<SignUpFormValues>({
     initialValues: {
       nick: '',
+      displayName: '',
       password: '',
       passwordAgain: '',
     },
@@ -57,6 +58,7 @@ export const SignUpPage = () => {
 
         await signUp.mutateAsync({
           nick: values.nick,
+          displayName: values.displayName,
           password: values.password,
         });
 
@@ -81,17 +83,19 @@ export const SignUpPage = () => {
     <Segment title="Регистрация">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
-          <Input label="Имя пользователя" name="nick" formik={formik} />
+          <Input label="Логин:" name="nick" formik={formik} />
+
+          <Input label="Имя пользователя:" name="displayName" formik={formik} />
 
           <Input
-            label="Пароль"
+            label="Пароль:"
             name="password"
             type="password"
             formik={formik}
           />
 
           <Input
-            label="Повторите пароль"
+            label="Повторите пароль:"
             name="passwordAgain"
             type="password"
             formik={formik}

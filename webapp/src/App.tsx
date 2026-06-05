@@ -6,8 +6,9 @@ import { MainCardPage } from './pages/MainCardPage';
 import { AllCardsPage } from './pages/AllCardsPage';
 import { ViewCardPage } from './pages/ViewCardPage';
 import { NewCardPage } from './pages/NewCardPage';
-import { ForumPage } from './pages/ForumPage';
-import { SignUpPage } from './pages/SighUpPage';
+import { BlogPage } from './pages/BlogPage';
+import { SignUpPage } from './pages/SignUpPage';
+import { SignInPage } from './pages/SignInPage';
 
 import './styles/global.scss';
 
@@ -35,10 +36,14 @@ export const App = () => {
               path={routes.getNewCardPageRoute()}
               element={<NewCardPage />}
             />
-            <Route path={routes.getForumRoutePage()} element={<ForumPage />} />
+            <Route path={routes.getBlogRoutePage()} element={<BlogPage />} />
             <Route
-              path={routes.getSighUpRoutePage()}
+              path={routes.getSignUpRoutePage()}
               element={<SignUpPage />}
+            />
+            <Route
+              path={routes.getSignInRoutePage()}
+              element={<SignInPage />}
             />
           </Route>
         </Routes>

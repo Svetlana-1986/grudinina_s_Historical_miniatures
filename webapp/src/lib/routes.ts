@@ -18,11 +18,10 @@ export const getViewCardPageRoute = ({ cardSlug }: ViewCardPageRouteParams) =>
 
 export const getNewCardPageRoute = () => 'cards/new';
 
-export const getForumRoutePage = () => '/forum';
+export const getBlogRoutePage = () => '/blog';
 
-export const getSighUpRoutePage = () => '/sigh-up';
+export const getSignUpRoutePage = () => '/sign-up';
 
-// export const viewCardPageRouteParams = { cardNick: ':cardNick' };
-// export type ViewCardPageRouteParams = { cardNick: string };
-// export const getViewCardPageRoute = ({ cardNick }: { cardNick: string }) =>
-//   `/cards/${cardNick}`;
+export const getSignInRoutePage = () => '/sign-in';
+
+

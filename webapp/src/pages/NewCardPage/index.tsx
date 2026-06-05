@@ -24,8 +24,6 @@ export const NewCardPage = () => {
     initialValues: {
       title: '',
       historicalPeriod: '',
-      authorNick: '',
-      authorName: '',
       description: '',
     },
 
@@ -66,18 +64,6 @@ export const NewCardPage = () => {
           <Input<CreateCardInput>
             name="historicalPeriod"
             label="Период"
-            formik={formik}
-          />
-
-          <Input<CreateCardInput>
-            name="authorNick"
-            label="Nick автора"
-            formik={formik}
-          />
-
-          <Input<CreateCardInput>
-            name="authorName"
-            label="Имя автора"
             formik={formik}
           />
 
