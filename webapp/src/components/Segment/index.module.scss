@@ -1,21 +1,26 @@
 @use '../../styles/vars.scss' as vars;
-@use '../../styles/mixins.scss' as css;
+@use '../../styles/mixins.scss' as mixins;
 
 .segment {
-  h1.title {
-    @include css.h1;
-  }
+  width: 100%;
+  max-width: 1100px;
+  padding: vars.$spacingXl;
+  background: linear-gradient(180deg, #1d2633 0%, #141b25 100%);
+  border: 1px solid rgb(203 167 93 / 25%);
+  border-radius: vars.$borderRadiusLarge;
+  box-shadow:
+    0 15px 40px rgb(0 0 0 / 40%),
+    0 0 0 1px rgb(203 167 93 / 8%) inset;
+}
 
-  h2.title {
-    @include css.h2;
-  }
+h1.title {
+  @include mixins.h1;
+}
 
-  .description {
-    font-size: vars.$fontSizeMd;
-    margin-top: 10px;
-  }
+h2.title {
+  @include mixins.h2;
+}
 
-  .content {
-    margin-top: 12px;
-  }
+.content {
+  margin-top: vars.$spacingXl;
 }

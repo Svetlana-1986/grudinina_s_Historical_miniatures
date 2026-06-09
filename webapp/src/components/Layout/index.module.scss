@@ -1,62 +1,102 @@
 @use '../../styles/vars.scss' as vars;
-@use '../../styles/mixins.scss' as css;
+@use '../../styles/mixins.scss' as mixins;
 
 .layout {
-  display: flex;
-
-  //   flex-flow: row nowrap;
   min-height: 100vh;
+}
 
-  @media (width <= 900px) {
-    flex-flow: column nowrap;
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgb(16 21 27 / 92%);
+  border-bottom: 1px solid vars.$borderColor;
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  min-height: 72px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logoImage {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgb(212 175 55 / 20%))
+    drop-shadow(0 0 18px rgb(212 175 55 / 12%));
+}
+
+.logoTitle {
+  font-family: vars.$titleFontFamily;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 0.95;
+  color: vars.$textPrimary;
+}
+
+.logoSubtitle {
+  margin-top: 0;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: vars.$textSecondary;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacingLg;
+}
+
+.link {
+  @include mixins.link(vars.$textPrimary, vars.$sandy);
+
+  font-size: vars.$fontSizeXl;
+  font-weight: 400;
+}
+
+.main {
+  padding-top: vars.$spacingXl;
+  padding-bottom: vars.$spacingXl;
+}
+
+@media (width <= 900px) {
+  .header .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: vars.$spacingMd;
+    padding-top: vars.$spacingMd;
+    padding-bottom: vars.$spacingMd;
   }
 
-  .navigation {
-    // height: 100%;
-    // overflow: auto;
-    flex: 0 0 240px;
-    padding: 20px 30px;
-    border-right: 1px solid vars.$sandy;
-
-    @media (width <= 900px) {
-      overflow: visible;
-      flex: 0 0 auto;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid vars.$sandy;
-    }
-
-    .logo {
-      font-weight: bold;
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    .menu {
-      .item {
-        &:not(:first-child) {
-          margin-top: 5px;
-        }
-
-        .link {
-          @include css.link;
-
-          font-size: 24px;
-        }
-      }
-    }
-  }
-
-  .content {
-    // height: 100%;
-    // overflow: auto;
-    flex: 1;
-    padding: 20px 30px;
-
-    @media (width <= 900px) {
-      overflow: visible;
-      flex: 0 0 auto;
-      height: auto;
-    }
+  .menu {
+    flex-wrap: wrap;
+    gap: vars.$spacingMd;
   }
 }

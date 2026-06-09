@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getViewCardPageRoute } from '../../lib/routes';
 import css from './index.module.scss';
 import { Segment } from '../../components/Segment';
+import { historicalPeriodLabels } from '../../lib/historicalPeriods';
 
 export const AllCardsPage = () => {
   const { data, error, isLoading, isFetching, isError } =
@@ -36,11 +37,15 @@ export const AllCardsPage = () => {
                 </Link>
               }
             >
-              <p className={css.cardMeta}>Период: {card.historicalPeriod}</p>
+              <p className={css.cardMeta}>
+                Период: {historicalPeriodLabels[card.historicalPeriod]}
+              </p>
 
               <p className={css.cardMeta}>Nick автора: {card.author?.nick}</p>
 
-              <p className={css.cardMeta}>Имя автора: {card.author?.displayName}</p>
+              <p className={css.cardMeta}>
+                Имя автора: {card.author?.displayName}
+              </p>
             </Segment>
           </div>
         ))}

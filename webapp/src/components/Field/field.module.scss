@@ -1,6 +1,7 @@
 @use '../../styles/vars.scss' as vars;
 
 .field {
+  width: 100%;
   margin-bottom: vars.$spacingLg;
 
   &.disabled {
@@ -11,39 +12,42 @@
 .label {
   display: block;
   margin-bottom: vars.$spacingSm;
-  color: vars.$textPrimary;
-  font-size: vars.$fontSizeXl;
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeLg;
   font-weight: 500;
   letter-spacing: 0.3px;
 }
 
 .input {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid vars.$textMuted;
-  border-radius: vars.$borderRadiusSmall;
-  background-color: vars.$paper;
-  color: vars.$backgroundPrimary;
-  font-size: vars.$fontSizeXl;
+  padding: 14px 16px;
+  border: 1px solid vars.$borderColor;
+  border-radius: vars.$borderRadiusMedium;
+  background-color: vars.$surfaceSecondary;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeMd;
   font-family: vars.$defaultFontFamily;
-  line-height: 1.5;
+  line-height: 1.6;
   outline: none;
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
 
   &:focus {
-    border-color: vars.$textPrimary;
-    box-shadow: 0 0 0 3px rgb(212 176 106 / 20%);
+    border-color: vars.$sandy;
+    box-shadow:
+      0 0 0 2px rgb(209 180 106 / 15%),
+      0 0 15px rgb(209 180 106 / 10%);
   }
 
   &:disabled {
     cursor: not-allowed;
+    opacity: 0.7;
   }
 
   &::placeholder {
-    color: #8f8373;
+    color: vars.$textMuted;
   }
 }
 
@@ -53,22 +57,22 @@
 
 .error {
   margin-top: vars.$spacingSm;
-  color: #f0c7c7;
+  color: vars.$errorText;
   font-size: vars.$fontSizeSm;
   line-height: 1.4;
 }
 
 .sm {
-  width: 220px;
+  max-width: 280px;
 }
 
 .md {
-  width: 420px;
+  max-width: 520px;
 }
 
 .lg {
-  width: 700px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 900px;
 }
 
 .full {

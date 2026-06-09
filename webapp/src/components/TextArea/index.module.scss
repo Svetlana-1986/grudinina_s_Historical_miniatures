@@ -1,5 +1,31 @@
+@use '../../styles/vars.scss' as vars;
+
 .textarea {
-  min-height: 180px;
+  width: 100%;
+  min-height: 260px;
+  padding: 16px;
   resize: vertical;
-  line-height: 1.5;
+  border: 1px solid vars.$borderColor;
+  border-radius: vars.$borderRadiusMedium;
+  background: vars.$surfaceSecondary;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeMd;
+  line-height: 1.6;
+  font-family: vars.$defaultFontFamily;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+
+  &:focus {
+    outline: none;
+    border-color: vars.$sandy;
+    box-shadow:
+      0 0 0 2px rgb(209 180 106 / 15%),
+      0 0 15px rgb(209 180 106 / 10%);
+  }
+
+  &::placeholder {
+    color: vars.$textMuted;
+  }
 }

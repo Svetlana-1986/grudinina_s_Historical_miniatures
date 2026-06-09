@@ -12,6 +12,9 @@ import {
 import { useState } from 'react';
 import { Button } from '../../components/Button';
 import { FormItems } from '../../components/FormItems';
+import { HistoricalPeriod } from '@prisma/client';
+import { historicalPeriodOptions } from '../../lib/historicalPeriods';
+import { Select } from '../../components/Select';
 
 export const NewCardPage = () => {
   // для формы -успех
@@ -20,10 +23,11 @@ export const NewCardPage = () => {
   const [submittingError, setSubmittingError] = useState<string | null>(null);
 
   const createCard = trpc.createCard.useMutation();
+
   const formik = useFormik<CreateCardInput>({
     initialValues: {
       title: '',
-      historicalPeriod: '',
+      historicalPeriod: HistoricalPeriod.ANCIENT,
       description: '',
     },
 
@@ -52,7 +56,7 @@ export const NewCardPage = () => {
   });
 
   return (
-    <Segment title="Создать карточку">
+    <Segment title="Новая миниатюра">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
           <Input<CreateCardInput>
@@ -61,10 +65,12 @@ export const NewCardPage = () => {
             formik={formik}
           />
 
-          <Input<CreateCardInput>
-            name="historicalPeriod"
+          <Select
             label="Период"
-            formik={formik}
+            name="historicalPeriod"
+            value={formik.values.historicalPeriod}
+            options={historicalPeriodOptions}
+            onChange={formik.handleChange}
           />
 
           <TextArea<CreateCardInput>

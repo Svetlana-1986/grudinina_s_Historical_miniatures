@@ -8,6 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum HistoricalPeriod {
+  ANCIENT
+  MIDDLE_AGES
+  NAPOLEONIC_WARS
+  WORLD_WAR_1
+  WORLD_WAR_2
+  FANTASY
+  OTHER
+}
+
+
 model User {
   id String @id @default(uuid())
   nick String @unique
@@ -23,7 +34,7 @@ model Card {
   id String @id @default(uuid())
   slug String @unique
   title String
-  historicalPeriod String
+  historicalPeriod HistoricalPeriod
   description String
   createdAt DateTime @default(now())
   authorId String

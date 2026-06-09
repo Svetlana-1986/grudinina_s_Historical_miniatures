@@ -1,6 +1,5 @@
-// Layout Главная, Все миниатюры
-
 import { Link, Outlet } from 'react-router-dom';
+
 import {
   getAllCardsPageRoute,
   getMainCardPageRoute,
@@ -9,74 +8,77 @@ import {
   getSignUpRoutePage,
   getSignInRoutePage,
 } from '../../lib/routes';
+
+import logo from '../../assets/logo.png';
+
 import css from './index.module.scss';
 
 export const Layout = () => {
   return (
     <div className={css.layout}>
-      <div className={css.navigation}>
-        <div className={css.logo}>Военно-историческая миниатюра</div>
-        <ul className={css.menu}>
-          <li className={css.item}>
-            <Link className={css.link} to={getMainCardPageRoute()}>
-              Главная
-            </Link>
-          </li>
-          <li className={css.item}>
-            <Link className={css.link} to={getAllCardsPageRoute()}>
-              Галерея
-            </Link>
-          </li>
-          <li className={css.item}>
-            <Link className={css.link} to={getNewCardPageRoute()}>
-              Создать карточку
-            </Link>
-          </li>
-          <li className={css.item}>
-            <Link className={css.link} to={getBlogRoutePage()}>
-              Блог
-            </Link>
-          </li>
-          <li className={css.item}>
-            <Link className={css.link} to={getSignUpRoutePage()}>
-              Регистрация
-            </Link>
-          </li>
-          <li className={css.item}>
-            <Link className={css.link} to={getSignInRoutePage()}>
-              Войти
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className={css.content}>
-        <Outlet />
-      </div>
+      <header className={css.header}>
+        <div className={css.container}>
+          <Link to={getMainCardPageRoute()} className={css.brand}>
+            <img src={logo} alt="HISTORIUM" className={css.logoImage} />
+
+            <div className={css.logo}>
+              <div className={css.logoTitle}>HISTORIUM</div>
+
+              <div className={css.logoSubtitle}>
+                Военно-историческая
+                <br />
+                миниатюра
+              </div>
+            </div>
+          </Link>
+
+          <nav>
+            <ul className={css.menu}>
+              <li>
+                <Link className={css.link} to={getMainCardPageRoute()}>
+                  Главная
+                </Link>
+              </li>
+
+              <li>
+                <Link className={css.link} to={getAllCardsPageRoute()}>
+                  Галерея
+                </Link>
+              </li>
+
+              <li>
+                <Link className={css.link} to={getNewCardPageRoute()}>
+                  Публикация
+                </Link>
+              </li>
+
+              <li>
+                <Link className={css.link} to={getBlogRoutePage()}>
+                  Блог
+                </Link>
+              </li>
+
+              <li>
+                <Link className={css.link} to={getSignUpRoutePage()}>
+                  Регистрация
+                </Link>
+              </li>
+
+              <li>
+                <Link className={css.link} to={getSignInRoutePage()}>
+                  Войти
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main className={css.main}>
+        <div className={css.container}>
+          <Outlet />
+        </div>
+      </main>
     </div>
-    // <div>
-    //   <p>
-    //     <b className={css.logo}>Военно-историческая миниатюра</b>
-    //   </p>
-    //   <ul>
-    //     <li>
-    //       <Link className={css.link} to={getMainCardPageRoute()}>
-    //         Главная
-    //       </Link>
-    //     </li>
-    //     <li>
-    //       <Link className={css.link} to={getAllCardsPageRoute()}>Все миниатюры</Link>
-    //     </li>
-    //     <li>
-    //       <Link className={css.link} to={getAllCardsPageRoute()}>Форум</Link>
-    //     </li>
-    //     <li>
-    //       <Link className={css.link} to={getAllCardsPageRoute()}>Регистрация</Link>
-    //     </li>
-    //   </ul>
-    //   <hr />
-    //   <div>
-    //     <Outlet />
-    //   </div>
-    // </div>
   );
 };

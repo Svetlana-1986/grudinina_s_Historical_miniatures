@@ -13,16 +13,18 @@
 
 @mixin h1 {
   font-family: $titleFontFamily;
-  font-size: 38px;
+  font-size: 56px;
   font-weight: 600;
   line-height: 1.1;
+  letter-spacing: 1px;
   color: $textPrimary;
 }
 
 @mixin h2 {
   font-family: $titleFontFamily;
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 600;
   line-height: 1.2;
+  letter-spacing: 0.5px;
   color: $textPrimary;
 }

@@ -10,11 +10,13 @@ body,
 }
 
 body {
-  font-family: $defaultFontFamily;;
+  font-family: $defaultFontFamily;
   font-size: $fontSizeSm;
   line-height: $defaultLineHeight;
-  background-color: $backgroundPrimary;
   color: $textPrimary;
+  background:
+    radial-gradient(circle at top center, rgb(30 45 70 / 45%), transparent 45%),
+    $backgroundPrimary;
 }
 
 *,
@@ -27,3 +29,32 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+::selection {
+  background-color: $sandy;
+  color: $black;
+}
+
+// ::-webkit-scrollbar {
+//   width: 12px;
+// }
+
+// ::-webkit-scrollbar-track {
+//   background: #141b25;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background: $sandy;
+
+//   border-radius: 999px;
+
+//   border: 2px solid #141b25;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #e1c27a;
+// }
+
+// html {
+//   scrollbar-color: #cba75d #141b25;
+// }

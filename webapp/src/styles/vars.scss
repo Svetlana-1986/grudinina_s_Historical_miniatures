@@ -1,31 +1,42 @@
-$backgroundPrimary: #1f1a17;
-$textPrimary: #f4e7c1;
-$textMuted: #b8a58a;
-$textSecondary: #d7c08a;
+$backgroundPrimary: #10151b;
+
+$surfacePrimary: #1a212b;
+$surfaceSecondary: #222b36;
+
+$textPrimary: #e8e1d0;
+$textSecondary: #cba75d;
+$textMuted: #9da6b3;
+
 $paper: #f2e7cf;
-$successBg: #2f3a2c;
-$successBorder: #617a52;
-$successText: #e4f0db;
-$textMuted: #a89262;
-$surfacePrimary: #3b2c2c;
-$warningBg: #5c4630;
-$warningText: #f3d7b8;
-$surfaceSecondary: #2a2020;
-$borderColor: rgb(209 180 106 / 20%);
-$shadowColor: rgb(0 0 0 / 35%);
+
+$successBg: #253126;
+$successBorder: #5d7a5e;
+$successText: #dcead7;
+
+$warningBg: #4a3927;
+$warningText: #f0d6a8;
+
 $error: #c86464;
 $errorBg: #4a2323;
 $errorBorder: #8b4b4b;
 $errorText: #ffd7d7;
-$brown: #2a2020;
-$sandy: #d1b46a;
-$beige: #e6d8bd;
+
+$borderColor: rgb(203 167 93 / 18%);
+$shadowColor: rgb(0 0 0 / 45%);
+
+$sandy: #cba75d;
+$beige: #f8f7f4;
+
+$brown: #222b36;
+
 $red: #c86464;
-$black: #181512;
+
+$black: #0f141a;
 $white: #f7f1e7;
 
 $borderRadiusSmall: 6px;
-$borderRadiusMedium: 9px;
+$borderRadiusMedium: 10px;
+$borderRadiusLarge: 12px;
 
 $fontSizeXs: 12px;
 $fontSizeSm: 14px;
@@ -42,6 +53,7 @@ $spacingXl: 40px;
 
 $defaultFontFamily: 'EB Garamond', serif;
 $titleFontFamily: 'Cormorant Garamond', serif;
+
 $defaultBackgroundColor: $backgroundPrimary;
 $defaultTextColor: $textPrimary;
-$defaultLineHeight: 1.5;
+$defaultLineHeight: 1.6;
