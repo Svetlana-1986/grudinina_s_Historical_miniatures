@@ -15,16 +15,20 @@ import { Segment } from '../../components/Segment';
 
 import { trpc } from '../../lib/trpc';
 
+import { useNavigate } from 'react-router-dom';
+import { getProfileRoutePage } from '../../lib/routes';
+
 const signInFormSchema = zSignInTrpcInput;
 
 type SignInFormValues = z.infer<typeof signInFormSchema>;
 
 export const SignInPage = () => {
-  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
-
   const [submittingError, setSubmittingError] = useState<string | null>(null);
 
   const signIn = trpc.signIn.useMutation();
+  const navigate = useNavigate();
+
+  const utils = trpc.useUtils();
 
   const formik = useFormik<SignInFormValues>({
     initialValues: {
@@ -38,20 +42,16 @@ export const SignInPage = () => {
       try {
         setSubmittingError(null);
 
-        setSuccessMessageVisible(false);
-
         await signIn.mutateAsync({
           nick: values.nick,
           password: values.password,
         });
 
+        await utils.me.invalidate();
+
         helpers.resetForm();
 
-        setSuccessMessageVisible(true);
-
-        setTimeout(() => {
-          setSuccessMessageVisible(false);
-        }, 3000);
+        navigate(getProfileRoutePage());
       } catch (error) {
         if (error instanceof Error) {
           setSubmittingError(error.message);
@@ -80,10 +80,6 @@ export const SignInPage = () => {
           )}
 
           {submittingError && <Alert type="error">{submittingError}</Alert>}
-
-          {successMessageVisible && (
-            <Alert type="success">Вход выполнен успешно</Alert>
-          )}
 
           <Button type="submit" loading={formik.isSubmitting}>
             Войти

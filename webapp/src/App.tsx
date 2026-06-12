@@ -9,6 +9,7 @@ import { NewCardPage } from './pages/NewCardPage';
 import { BlogPage } from './pages/BlogPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { SignInPage } from './pages/SignInPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 import './styles/global.scss';
 
@@ -45,6 +46,7 @@ export const App = () => {
               path={routes.getSignInRoutePage()}
               element={<SignInPage />}
             />
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

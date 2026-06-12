@@ -15,11 +15,14 @@ import { FormItems } from '../../components/FormItems';
 import { HistoricalPeriod } from '@prisma/client';
 import { historicalPeriodOptions } from '../../lib/historicalPeriods';
 import { Select } from '../../components/Select';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 export const NewCardPage = () => {
-  // для формы -успех
+  const { isAuthorized, isLoading } = useAuth();
+
   const [successMessageVisible, setSuccessMessageVisible] = useState(false);
-  // для формы с ошибкой
+
   const [submittingError, setSubmittingError] = useState<string | null>(null);
 
   const createCard = trpc.createCard.useMutation();
@@ -54,6 +57,13 @@ export const NewCardPage = () => {
       }
     },
   });
+  if (isLoading) {
+    return <div>Загрузка...</div>;
+  }
+
+  if (!isAuthorized) {
+    return <Navigate to="/sign-in" replace />;
+  }
 
   return (
     <Segment title="Новая миниатюра">

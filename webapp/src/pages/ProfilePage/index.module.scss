@@ -1,0 +1,112 @@
+@use '../../styles/vars.scss' as vars;
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.infoCard {
+  padding: 24px;
+  border: 1px solid vars.$borderColor;
+  border-radius: vars.$borderRadiusLarge;
+  background: rgb(20 27 37 / 60%);
+}
+
+.label {
+  margin-bottom: 10px;
+  color: vars.$textMuted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: vars.$fontSizeSm;
+}
+
+.value {
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeXl;
+}
+
+.tabs {
+  display: flex;
+  gap: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid vars.$borderColor;
+}
+
+.tab,
+.activeTab {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: vars.$fontSizeLg;
+  color: vars.$textMuted;
+  transition: color 200ms ease;
+}
+
+.tab:hover {
+  color: vars.$sandy;
+}
+
+.activeTab {
+  color: vars.$sandy;
+  position: relative;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -17px;
+  width: 100%;
+  height: 2px;
+  background: vars.$sandy;
+}
+
+.section {
+  min-height: 300px;
+}
+
+// .profile {
+//   display: flex;
+
+//   flex-direction: column;
+
+//   gap: vars.$spacingLg;
+// }
+
+// .card {
+//   padding: vars.$spacingLg;
+
+//   background: vars.$surfacePrimary;
+
+//   border: 1px solid vars.$borderColor;
+
+//   border-radius: vars.$borderRadiusMedium;
+// }
+
+// .label {
+//   margin-bottom: vars.$spacingSm;
+
+//   color: vars.$textMuted;
+
+//   font-size: vars.$fontSizeSm;
+
+//   text-transform: uppercase;
+
+//   letter-spacing: 1px;
+// }
+
+// .value {
+//   color: vars.$textPrimary;
+
+//   font-size: vars.$fontSizeLg;
+// }
+
+// .actions {
+//   display: flex;
+
+//   gap: vars.$spacingMd;
+
+//   flex-wrap: wrap;
+// }

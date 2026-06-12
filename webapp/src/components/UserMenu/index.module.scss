@@ -1,0 +1,69 @@
+@use '../../styles/vars.scss' as vars;
+
+.wrapper {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeLg;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 200ms ease;
+
+  &:hover {
+    color: vars.$sandy;
+  }
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: vars.$surfacePrimary;
+  border: 1px solid vars.$borderColor;
+  border-radius: vars.$borderRadiusMedium;
+  overflow: hidden;
+  z-index: 9999;
+  box-shadow: 0 15px 35px rgb(0 0 0 / 40%);
+}
+
+.item {
+  display: block;
+  padding: 14px 18px;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeMd;
+  transition: background-color 200ms ease;
+
+  &:hover {
+    background: rgb(209 180 106 / 10%);
+  }
+}
+
+.separator {
+  height: 1px;
+  background: vars.$borderColor;
+}
+
+.signOut {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  background: transparent;
+  color: vars.$textPrimary;
+  text-align: left;
+  font-size: vars.$fontSizeMd;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+
+  &:hover {
+    background: rgb(209 180 106 / 10%);
+  }
+}

@@ -12,5 +12,6 @@ export const meTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
   return {
     id: user.id,
     nick: user.nick,
+    createdAt: user.createdAt,
   };
 });

@@ -9,14 +9,14 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   background: rgb(16 21 27 / 92%);
   border-bottom: 1px solid vars.$borderColor;
 }
@@ -24,14 +24,21 @@
 .header .container {
   display: flex;
   align-items: center;
-  gap: 48px;
-  min-height: 72px;
+  min-height: 92px;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 18px;
+  flex-shrink: 0;
+  padding: 12px 0;
+}
+
+.logoImage {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
@@ -41,44 +48,88 @@
   justify-content: center;
 }
 
-.logoImage {
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px rgb(212 175 55 / 20%))
-    drop-shadow(0 0 18px rgb(212 175 55 / 12%));
-}
-
 .logoTitle {
   font-family: vars.$titleFontFamily;
   font-size: 30px;
-  font-weight: 700;
+  line-height: 1;
   letter-spacing: 4px;
-  line-height: 0.95;
   color: vars.$textPrimary;
 }
 
 .logoSubtitle {
-  margin-top: 0;
-  font-size: 16px;
-  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.15;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: vars.$textSecondary;
+
+  span:last-child {
+    text-align: center;
+  }
+}
+
+.nav {
+  margin-left: auto;
 }
 
 .menu {
   display: flex;
   align-items: center;
-  gap: vars.$spacingLg;
+  gap: 42px;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 48px;
 }
 
 .link {
   @include mixins.link(vars.$textPrimary, vars.$sandy);
 
   font-size: vars.$fontSizeXl;
-  font-weight: 400;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.registerLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 22px;
+  border-radius: vars.$borderRadiusMedium;
+  background: vars.$sandy;
+  color: vars.$black;
+  font-size: vars.$fontSizeXl;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.registerLink:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgb(209 180 106 / 30%);
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: vars.$textPrimary;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 .main {
@@ -86,17 +137,95 @@
   padding-bottom: vars.$spacingXl;
 }
 
-@media (width <= 900px) {
-  .header .container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: vars.$spacingMd;
-    padding-top: vars.$spacingMd;
-    padding-bottom: vars.$spacingMd;
+@media (width <= 1024px) {
+  .menu {
+    gap: 24px;
   }
 
-  .menu {
-    flex-wrap: wrap;
-    gap: vars.$spacingMd;
+  .auth {
+    margin-left: 24px;
   }
+
+  .link,
+  .registerLink {
+    font-size: vars.$fontSizeLg;
+  }
+
+  .registerLink {
+    height: 38px;
+    padding: 0 18px;
+  }
+}
+
+@media (width <= 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .nav,
+  .auth {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .logoTitle {
+    font-size: 24px;
+  }
+
+  .logoSubtitle {
+    font-size: 11px;
+  }
+
+  .logoImage {
+    width: 56px;
+    height: 56px;
+  }
+
+  .header .container {
+    min-height: 78px;
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: vars.$surfacePrimary;
+  border-bottom: 1px solid vars.$borderColor;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 200;
+}
+
+.mobileLink {
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeLg;
+}
+
+.mobileRegister {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: vars.$borderRadiusMedium;
+  background: vars.$sandy;
+  color: vars.$black;
+  font-weight: 500;
+}
+
+.mobileSeparator {
+  height: 1px;
+  background: vars.$borderColor;
+}
+
+.mobileUser {
+  color: vars.$sandy;
+  font-weight: 600;
 }
