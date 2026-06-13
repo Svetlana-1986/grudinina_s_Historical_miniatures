@@ -5,17 +5,18 @@ export const Segment = ({
   size = 1,
   children,
 }: {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   size?: 1 | 2;
   children?: React.ReactNode;
 }) => {
   return (
     <div className={css.segment}>
-      {size === 1 ? (
-        <h1 className={css.title}>{title}</h1>
-      ) : (
-        <h2 className={css.title}>{title}</h2>
-      )}
+      {title &&
+        (size === 1 ? (
+          <h1 className={css.title}>{title}</h1>
+        ) : (
+          <h2 className={css.title}>{title}</h2>
+        ))}
 
       <div className={css.content}>{children}</div>
     </div>

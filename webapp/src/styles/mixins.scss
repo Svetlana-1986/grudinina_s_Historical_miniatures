@@ -13,8 +13,8 @@
 
 @mixin h1 {
   font-family: $titleFontFamily;
-  font-size: 36px;
-  font-weight: 600;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: 1px;
   color: $textPrimary;
@@ -22,9 +22,10 @@
 
 @mixin h2 {
   font-family: $titleFontFamily;
-  font-size: 34px;
+  font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.5px;
+  margin-bottom: 12px;
   color: $textPrimary;
 }

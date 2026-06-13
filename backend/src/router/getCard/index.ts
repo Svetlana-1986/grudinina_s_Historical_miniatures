@@ -6,10 +6,7 @@ import { trpc } from '../../lib/trpc.js';
 export const getCardTrpcRoute = trpc.procedure
   .input(
     z.object({
-      cardSlug: z
-        .string()
-        .min(1)
-        .regex(/^[a-z0-9-]+$/),
+      cardSlug: z.string().min(1),
     }),
   )
   .query(async ({ ctx, input }) => {

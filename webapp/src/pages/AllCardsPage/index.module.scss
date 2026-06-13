@@ -1,9 +1,15 @@
 @use '../../styles/vars.scss' as vars;
 @use '../../styles/mixins.scss' as mixins;
 
+// .cards {
+//   display: flex;
+//   flex-direction: column;
+//   gap: vars.$spacingLg;
+// }
+
 .cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: vars.$spacingLg;
 }
 

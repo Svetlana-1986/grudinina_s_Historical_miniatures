@@ -1,10 +1,9 @@
-import css from './index.module.scss';
+import { Segment } from '../../components/Segment';
 
 export const BlogPage = () => {
   return (
-    <div>
-      <h1 className={css.title}>Блог</h1>
-      <div>Появится позже</div>
-    </div>
+    <Segment title="Блог" size={2}>
+      В разработке...
+    </Segment>
   );
 };

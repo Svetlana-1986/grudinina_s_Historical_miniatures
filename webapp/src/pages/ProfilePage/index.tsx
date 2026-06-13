@@ -1,17 +1,12 @@
-// import { Link } from 'react-router-dom';
-
 import { Segment } from '../../components/Segment';
-// import { Button } from '../../components/Button';
-// import { SignOutButton } from '../../components/SignOutButton';
-
 import { trpc } from '../../lib/trpc';
 
-// import { getNewCardPageRoute } from '../../lib/routes';
-
+import { CardPreview } from '../../components/CardPreview';
 import css from './index.module.scss';
 
 export const ProfilePage = () => {
   const { data: user, isLoading } = trpc.me.useQuery();
+  const { data: cards, isLoading: cardsLoading } = trpc.getMyCards.useQuery();
 
   if (isLoading) {
     return <Segment title="Профиль">Загрузка...</Segment>;
@@ -22,7 +17,7 @@ export const ProfilePage = () => {
   }
 
   return (
-    <Segment title="Профиль">
+    <Segment title="Профиль" size={2}>
       <div className={css.profile}>
         <div className={css.infoCard}>
           <div className={css.label}>Никнейм</div>
@@ -38,7 +33,31 @@ export const ProfilePage = () => {
           <button className={css.tab}>Настройки</button>
         </div>
 
-        <div className={css.section}>Здесь будут карточки пользователя</div>
+        <div className={css.section}>
+          <div className={css.sectionTitle}>
+            Мои публикации ({cards?.length ?? 0})
+          </div>
+
+          {cardsLoading ? (
+            <div className={css.empty}>Загрузка публикаций...</div>
+          ) : cards?.length ? (
+            <div className={css.cards}>
+              {cards.map((card) => (
+                <CardPreview
+                  key={card.id}
+                  id={card.id}
+                  slug={card.slug}
+                  title={card.title}
+                  historicalPeriod={card.historicalPeriod}
+                  createdAt={card.createdAt}
+                  author={user.nick}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={css.empty}>У вас пока нет публикаций</div>
+          )}
+        </div>
       </div>
     </Segment>
   );

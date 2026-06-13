@@ -6,6 +6,7 @@ import {
   getBlogRoutePage,
   getSignUpRoutePage,
   getSignInRoutePage,
+  getNewCardPageRoute,
 } from '../../lib/routes';
 
 import logo from '../../assets/logo.png';
@@ -15,6 +16,8 @@ import css from './index.module.scss';
 import { useAuth } from '../../hooks/useAuth';
 
 import { UserMenu } from '../UserMenu';
+
+import { SignOutButton } from '../SignOutButton';
 
 import { useState } from 'react';
 
@@ -128,11 +131,14 @@ export const Layout = () => {
 
                   <Link
                     className={css.mobileLink}
-                    to="/new-card"
+                    to={getNewCardPageRoute()}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Создать публикацию
                   </Link>
+                  <div className={css.mobileSignOut}>
+                    <SignOutButton className={css.mobileSignOutButton} />
+                  </div>
                 </>
               ) : (
                 <>

@@ -3,110 +3,124 @@
 .profile {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: vars.$spacingLg;
 }
 
 .infoCard {
-  padding: 24px;
+  padding: vars.$spacingLg;
+  background: vars.$surfacePrimary;
   border: 1px solid vars.$borderColor;
   border-radius: vars.$borderRadiusLarge;
-  background: rgb(20 27 37 / 60%);
 }
 
 .label {
-  margin-bottom: 10px;
-  color: vars.$textMuted;
+  margin-bottom: vars.$spacingSm;
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeSm;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: vars.$fontSizeSm;
 }
 
 .value {
   color: vars.$textPrimary;
-  font-size: vars.$fontSizeXl;
+  font-size: vars.$fontSizeLg;
+  font-weight: 600;
 }
 
 .tabs {
   display: flex;
-  gap: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid vars.$borderColor;
+  gap: vars.$spacingMd;
+  flex-wrap: wrap;
 }
 
 .tab,
 .activeTab {
-  padding: 0;
-  border: none;
+  padding: 10px 18px;
+  border-radius: vars.$borderRadiusMedium;
+  border: 1px solid vars.$borderColor;
   background: transparent;
+  color: vars.$textPrimary;
   cursor: pointer;
-  font-size: vars.$fontSizeLg;
-  color: vars.$textMuted;
-  transition: color 200ms ease;
-}
-
-.tab:hover {
-  color: vars.$sandy;
 }
 
 .activeTab {
+  border-color: vars.$sandy;
   color: vars.$sandy;
-  position: relative;
-}
-
-.activeTab::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -17px;
-  width: 100%;
-  height: 2px;
-  background: vars.$sandy;
 }
 
 .section {
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacingMd;
 }
 
-// .profile {
-//   display: flex;
+.sectionTitle {
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeLg;
+  font-weight: 600;
+}
 
-//   flex-direction: column;
-
-//   gap: vars.$spacingLg;
-// }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: vars.$spacingLg;
+}
 
 // .card {
-//   padding: vars.$spacingLg;
+//   display: flex;
 
-//   background: vars.$surfacePrimary;
+//   justify-content: space-between;
+
+//   align-items: center;
+
+//   padding: vars.$spacingLg;
 
 //   border: 1px solid vars.$borderColor;
 
-//   border-radius: vars.$borderRadiusMedium;
+//   border-radius: vars.$borderRadiusLarge;
+
+//   background: vars.$surfacePrimary;
+
+//   transition:
+//     border-color 200ms ease,
+//     transform 200ms ease;
 // }
 
-// .label {
-//   margin-bottom: vars.$spacingSm;
+// .card:hover {
+//   border-color: vars.$sandy;
 
-//   color: vars.$textMuted;
-
-//   font-size: vars.$fontSizeSm;
-
-//   text-transform: uppercase;
-
-//   letter-spacing: 1px;
+//   transform: translateY(-2px);
 // }
 
-// .value {
+// .cardTitle {
 //   color: vars.$textPrimary;
 
 //   font-size: vars.$fontSizeLg;
 // }
 
-// .actions {
-//   display: flex;
+// .cardDate {
+//   color: vars.$textSecondary;
 
-//   gap: vars.$spacingMd;
-
-//   flex-wrap: wrap;
+//   font-size: vars.$fontSizeSm;
 // }
+
+.empty {
+  color: vars.$textSecondary;
+}
+
+@media (width <= 768px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: vars.$spacingSm;
+  }
+
+  .tabs {
+    width: 100%;
+  }
+
+  .tab,
+  .activeTab {
+    flex: 1;
+  }
+}

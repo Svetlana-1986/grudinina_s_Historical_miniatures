@@ -1,31 +1,86 @@
 @use '../../styles/vars.scss' as vars;
 
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacingXl;
+}
+
+.hero {
+  padding: 48px;
+  border-radius: vars.$borderRadiusLarge;
+  border: 1px solid vars.$borderColor;
+  background: vars.$surfacePrimary;
+}
+
+.period {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 8px 14px;
+  margin-bottom: vars.$spacingLg;
+  border-radius: 999px;
+  background: rgb(209 180 106 / 15%);
+  color: vars.$sandy;
+  font-size: vars.$fontSizeSm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.title {
+  max-width: 1100px;
+  color: vars.$textPrimary;
+  font-family: vars.$titleFontFamily;
+  font-size: clamp(1rem, 2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
 .meta {
-  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$spacingLgn;
+  margin-top: vars.$spacingLg;
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeLg;
 }
 
-.metaItem {
-  font-size: vars.$fontSizeXl;
-  color: vars.$textMuted;
-  line-height: 1.5;
-
-  & + .metaItem {
-    margin-top: 4px;
-  }
+.meta span {
+  color: vars.$textPrimary;
+  font-weight: 500;
 }
 
-.createdAt {
-  font-size: vars.$fontSizeXl;
-  color: vars.$textMuted;
-  margin-bottom: 18px;
+.content {
+  padding: 40px;
+  border-radius: vars.$borderRadiusLarge;
+  border: 1px solid vars.$borderColor;
+  background: vars.$surfacePrimary;
 }
 
 .description {
+  color: vars.$textPrimary;
   font-size: vars.$fontSizeXl;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  letter-spacing: 1px;
+  line-height: 1.9;
+  white-space: pre-wrap;
 }
 
-.text {
-  line-height: 1.7;
+@media (width <= 768px) {
+  .hero {
+    padding: 24px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: vars.$spacingSm;
+  }
+
+  .description {
+    font-size: vars.$fontSizeMd;
+  }
 }

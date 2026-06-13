@@ -1,0 +1,70 @@
+@use '../../styles/vars.scss' as vars;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  padding: vars.$spacingLg;
+  border-radius: vars.$borderRadiusLarge;
+  border: 1px solid vars.$borderColor;
+  background: vars.$surfacePrimary;
+  text-decoration: none;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: vars.$sandy;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 25%);
+}
+
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgb(209 180 106 / 12%);
+  color: vars.$sandy;
+  font-size: vars.$fontSizeSm;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: vars.$spacingMd;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeXl;
+  font-weight: 600;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: vars.$spacingLg;
+  gap: vars.$spacingMd;
+}
+
+.author {
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeSm;
+}
+
+.date {
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeSm;
+  white-space: nowrap;
+}
+
+@media (width <= 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

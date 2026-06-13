@@ -16,6 +16,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  overflow: visible;
   backdrop-filter: blur(12px);
   background: rgb(16 21 27 / 92%);
   border-bottom: 1px solid vars.$borderColor;
@@ -23,6 +24,7 @@
 
 .header .container {
   display: flex;
+  position: relative;
   align-items: center;
   min-height: 92px;
 }
@@ -208,6 +210,23 @@
   color: vars.$textPrimary;
   font-size: vars.$fontSizeLg;
 }
+
+.mobileSignOut {
+  margin-top: 8px;
+}
+
+.mobileSignOutButton {
+  all: unset;
+  color: vars.$textPrimary;
+  font-size: vars.$fontSizeLg;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.mobileSignOutButton:hover {
+  color: vars.$sandy;
+}
+
 
 .mobileRegister {
   display: inline-flex;
