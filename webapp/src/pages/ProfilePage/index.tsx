@@ -51,6 +51,7 @@ export const ProfilePage = () => {
                   historicalPeriod={card.historicalPeriod}
                   createdAt={card.createdAt}
                   author={user.nick}
+                  coverImage={card.coverImage}
                 />
               ))}
             </div>

@@ -34,6 +34,7 @@ export const AllCardsPage = () => {
             historicalPeriod={card.historicalPeriod}
             createdAt={card.createdAt}
             author={card.author?.nick}
+            coverImage={card.coverImage}
           />
         ))}
       </div>

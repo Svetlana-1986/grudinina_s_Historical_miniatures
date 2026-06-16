@@ -35,10 +35,21 @@ model Card {
   slug String @unique
   title String
   historicalPeriod HistoricalPeriod
+  coverImage String?
+  images CardImage[]
   description String
   createdAt DateTime @default(now())
   authorId String
   author User @relation(fields: [authorId], references: [id])
+}
+
+model CardImage {
+  id String @id @default(cuid())
+  imageUrl String
+  position Int @default(0)
+  cardId String
+  card Card @relation(fields: [cardId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Session {

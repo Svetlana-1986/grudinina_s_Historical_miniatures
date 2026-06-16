@@ -60,7 +60,7 @@
 
 .description {
   color: vars.$textPrimary;
-  font-size: vars.$fontSizeXl;
+  font-size: vars.$fontSizeLg;
   letter-spacing: 1px;
   line-height: 1.9;
   white-space: pre-wrap;
@@ -83,4 +83,62 @@
   .description {
     font-size: vars.$fontSizeMd;
   }
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+// .galleryItem {
+
+//   overflow: hidden;
+
+//   border-radius: 16px;
+
+//   border: 1px solid vars.$borderColor;
+
+//   background: vars.$surfacePrimary;
+// }
+
+.galleryItem {
+  // cursor: pointer;
+
+  cursor: zoom-in;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid vars.$borderColor;
+  background: vars.$surfacePrimary;
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  display: block;
+  background: #10151b;
+}
+
+.galleryItem:hover img {
+  transform: scale(1.04);
+}
+
+.coverWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111827;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.coverImage {
+  max-width: 100%;
+  max-height: 900px;
+  object-fit: contain;
+  display: block;
 }

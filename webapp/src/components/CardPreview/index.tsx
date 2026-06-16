@@ -15,6 +15,7 @@ type Props = {
   historicalPeriod: HistoricalPeriod;
   author?: string;
   createdAt: string | Date;
+  coverImage?: string | null;
 };
 
 export const CardPreview = ({
@@ -23,6 +24,7 @@ export const CardPreview = ({
   historicalPeriod,
   author,
   createdAt,
+  coverImage,
 }: Props) => {
   return (
     <Link
@@ -31,17 +33,31 @@ export const CardPreview = ({
         cardSlug: slug,
       })}
     >
-      <div className={css.badge}>
-        {historicalPeriodLabels[historicalPeriod]}
+      <div className={css.imageWrapper}>
+        {coverImage ? (
+          <img
+            src={`http://localhost:3000${coverImage}`}
+            alt={title}
+            className={css.image}
+          />
+        ) : (
+          <div className={css.placeholder}>Нет изображения</div>
+        )}
       </div>
 
-      <h3 className={css.title}>{title}</h3>
+      <div className={css.content}>
+        <div className={css.badge}>
+          {historicalPeriodLabels[historicalPeriod]}
+        </div>
 
-      <div className={css.footer}>
-        <div className={css.author}>{author}</div>
+        <h3 className={css.title}>{title}</h3>
 
-        <div className={css.date}>
-          {new Date(createdAt).toLocaleDateString('ru-RU')}
+        <div className={css.footer}>
+          <div className={css.author}>{author}</div>
+
+          <div className={css.date}>
+            {new Date(createdAt).toLocaleDateString('ru-RU')}
+          </div>
         </div>
       </div>
     </Link>

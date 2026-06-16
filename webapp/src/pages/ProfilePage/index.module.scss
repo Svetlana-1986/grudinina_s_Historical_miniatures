@@ -66,44 +66,6 @@
   gap: vars.$spacingLg;
 }
 
-// .card {
-//   display: flex;
-
-//   justify-content: space-between;
-
-//   align-items: center;
-
-//   padding: vars.$spacingLg;
-
-//   border: 1px solid vars.$borderColor;
-
-//   border-radius: vars.$borderRadiusLarge;
-
-//   background: vars.$surfacePrimary;
-
-//   transition:
-//     border-color 200ms ease,
-//     transform 200ms ease;
-// }
-
-// .card:hover {
-//   border-color: vars.$sandy;
-
-//   transform: translateY(-2px);
-// }
-
-// .cardTitle {
-//   color: vars.$textPrimary;
-
-//   font-size: vars.$fontSizeLg;
-// }
-
-// .cardDate {
-//   color: vars.$textSecondary;
-
-//   font-size: vars.$fontSizeSm;
-// }
-
 .empty {
   color: vars.$textSecondary;
 }

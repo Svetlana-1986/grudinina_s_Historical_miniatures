@@ -17,6 +17,12 @@ export const getCardTrpcRoute = trpc.procedure
 
       include: {
         author: true,
+
+        images: {
+          orderBy: {
+            position: 'asc',
+          },
+        },
       },
     });
 

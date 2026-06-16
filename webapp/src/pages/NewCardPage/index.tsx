@@ -1,3 +1,4 @@
+import { uploadImage } from '../../api/uploadImage';
 import { useFormik } from 'formik';
 import { Segment } from '../../components/Segment';
 import { Input } from '../../components/Input';
@@ -17,6 +18,7 @@ import { historicalPeriodOptions } from '../../lib/historicalPeriods';
 import { Select } from '../../components/Select';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useRef } from 'react';
 
 export const NewCardPage = () => {
   const { isAuthorized, isLoading } = useAuth();
@@ -25,6 +27,14 @@ export const NewCardPage = () => {
 
   const [submittingError, setSubmittingError] = useState<string | null>(null);
 
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+
+  const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
+
+  const coverInputRef = useRef<HTMLInputElement>(null);
+
+  const galleryInputRef = useRef<HTMLInputElement>(null);
+
   const createCard = trpc.createCard.useMutation();
 
   const formik = useFormik<CreateCardInput>({
@@ -32,18 +42,47 @@ export const NewCardPage = () => {
       title: '',
       historicalPeriod: HistoricalPeriod.ANCIENT,
       description: '',
+      coverImage: undefined,
+      images: [],
     },
 
     validate: withZodSchema(zCreateCardTrpcInput),
     onSubmit: async (values) => {
       try {
         setSubmittingError(null);
-        await createCard.mutateAsync(values);
-        // сброс данных из формы до начального
+
+        let coverImage: string | undefined;
+
+        if (coverFile) {
+          const uploadedCover = await uploadImage(coverFile);
+
+          coverImage = uploadedCover.url;
+        }
+
+        const galleryUrls: string[] = [];
+
+        for (const file of galleryFiles) {
+          const uploadedImage = await uploadImage(file);
+
+          galleryUrls.push(uploadedImage.url);
+        }
+
+        await createCard.mutateAsync({
+          ...values,
+
+          coverImage,
+
+          images: galleryUrls,
+        });
+
         formik.resetForm();
-        // делаем сообщение видимым
+
+        setCoverFile(null);
+
+        setGalleryFiles([]);
+
         setSuccessMessageVisible(true);
-        // через 3 сек скрываем сообщение
+
         setTimeout(() => {
           setSuccessMessageVisible(false);
         }, 3000);
@@ -74,7 +113,6 @@ export const NewCardPage = () => {
             label="Название"
             formik={formik}
           />
-
           <Select
             label="Период"
             name="historicalPeriod"
@@ -82,19 +120,48 @@ export const NewCardPage = () => {
             options={historicalPeriodOptions}
             onChange={formik.handleChange}
           />
+          <div>
+            <label>Главное фото</label>
 
+            <input
+              ref={coverInputRef}
+              type="file"
+              accept="image/*"
+              onChange={(event) => {
+                const file = event.currentTarget.files?.[0];
+
+                setCoverFile(file ?? null);
+              }}
+            />
+          </div>
+          <div>
+            <label>Дополнительные фотографии</label>
+
+            <input
+              ref={galleryInputRef}
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(event) => {
+                const files = Array.from(event.currentTarget.files ?? []);
+
+                setGalleryFiles((prev) => [...prev, ...files]);
+              }}
+            />
+          </div>
+          {coverFile && <div>Главное фото: {coverFile.name}</div>}
+          {galleryFiles.length > 0 && (
+            <div>Загружено фотографий: {galleryFiles.length}</div>
+          )}
           <TextArea<CreateCardInput>
             name="description"
             label="Описание миниатюры"
             formik={formik}
           />
-
           {!!submittingError && <Alert type="error">{submittingError}</Alert>}
-
           {successMessageVisible && (
             <Alert type="success">Карточка создана!</Alert>
           )}
-
           <Button type="submit" loading={formik.isSubmitting}>
             Создать карточку
           </Button>

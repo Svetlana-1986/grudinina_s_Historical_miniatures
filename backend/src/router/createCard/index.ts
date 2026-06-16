@@ -36,7 +36,20 @@ export const createCardTrpcRoute = protectedProcedure
 
         description: input.description,
 
+        coverImage: input.coverImage,
+
         authorId: currentUser.id,
+
+        images: {
+          create: input.images.map((imageUrl, index) => ({
+            imageUrl,
+            position: index,
+          })),
+        },
+      },
+
+      include: {
+        images: true,
       },
     });
 
