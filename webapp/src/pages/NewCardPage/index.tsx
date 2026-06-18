@@ -19,6 +19,7 @@ import { Select } from '../../components/Select';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useRef } from 'react';
+import css from './index.module.scss';
 
 export const NewCardPage = () => {
   const { isAuthorized, isLoading } = useAuth();
@@ -43,6 +44,8 @@ export const NewCardPage = () => {
       historicalPeriod: HistoricalPeriod.ANCIENT,
       description: '',
       coverImage: undefined,
+      coverImagePreview: undefined,
+      coverImageHero: undefined,
       images: [],
     },
 
@@ -52,11 +55,17 @@ export const NewCardPage = () => {
         setSubmittingError(null);
 
         let coverImage: string | undefined;
+        let coverImagePreview: string | undefined;
+        let coverImageHero: string | undefined;
 
         if (coverFile) {
           const uploadedCover = await uploadImage(coverFile);
 
-          coverImage = uploadedCover.url;
+          coverImage = uploadedCover.originalUrl;
+
+          coverImagePreview = uploadedCover.previewUrl;
+
+          coverImageHero = uploadedCover.heroUrl;
         }
 
         const galleryUrls: string[] = [];
@@ -64,13 +73,17 @@ export const NewCardPage = () => {
         for (const file of galleryFiles) {
           const uploadedImage = await uploadImage(file);
 
-          galleryUrls.push(uploadedImage.url);
+          galleryUrls.push(uploadedImage.originalUrl);
         }
 
         await createCard.mutateAsync({
           ...values,
 
           coverImage,
+
+          coverImagePreview,
+
+          coverImageHero,
 
           images: galleryUrls,
         });
@@ -80,6 +93,14 @@ export const NewCardPage = () => {
         setCoverFile(null);
 
         setGalleryFiles([]);
+
+        if (coverInputRef.current) {
+          coverInputRef.current.value = '';
+        }
+
+        if (galleryInputRef.current) {
+          galleryInputRef.current.value = '';
+        }
 
         setSuccessMessageVisible(true);
 
@@ -120,11 +141,15 @@ export const NewCardPage = () => {
             options={historicalPeriodOptions}
             onChange={formik.handleChange}
           />
-          <div>
-            <label>Главное фото</label>
+          <div className={css.uploadRow}>
+            <label className={css.fileButton} htmlFor="cover-upload">
+              Выбрать главное фото
+            </label>
 
             <input
+              id="cover-upload"
               ref={coverInputRef}
+              className={css.hiddenInput}
               type="file"
               accept="image/*"
               onChange={(event) => {
@@ -133,12 +158,22 @@ export const NewCardPage = () => {
                 setCoverFile(file ?? null);
               }}
             />
+
+            <div className={css.fileInfo}>
+              {coverFile
+                ? `Главное фото: ${coverFile.name}`
+                : 'Главное фото не выбрано'}
+            </div>
           </div>
-          <div>
-            <label>Дополнительные фотографии</label>
+          <div className={css.uploadRow}>
+            <label className={css.fileButton} htmlFor="gallery-upload">
+              Добавить фотографии
+            </label>
 
             <input
+              id="gallery-upload"
               ref={galleryInputRef}
+              className={css.hiddenInput}
               type="file"
               multiple
               accept="image/*"
@@ -148,11 +183,14 @@ export const NewCardPage = () => {
                 setGalleryFiles((prev) => [...prev, ...files]);
               }}
             />
+
+            <div className={css.fileInfo}>
+              {galleryFiles.length > 0
+                ? `Загружено фотографий: ${galleryFiles.length}`
+                : 'Фотографии не выбраны'}
+            </div>
           </div>
-          {coverFile && <div>Главное фото: {coverFile.name}</div>}
-          {galleryFiles.length > 0 && (
-            <div>Загружено фотографий: {galleryFiles.length}</div>
-          )}
+
           <TextArea<CreateCardInput>
             name="description"
             label="Описание миниатюры"

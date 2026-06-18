@@ -15,7 +15,7 @@ type Props = {
   historicalPeriod: HistoricalPeriod;
   author?: string;
   createdAt: string | Date;
-  coverImage?: string | null;
+  coverImagePreview?: string | null;
 };
 
 export const CardPreview = ({
@@ -24,7 +24,7 @@ export const CardPreview = ({
   historicalPeriod,
   author,
   createdAt,
-  coverImage,
+  coverImagePreview,
 }: Props) => {
   return (
     <Link
@@ -34,9 +34,9 @@ export const CardPreview = ({
       })}
     >
       <div className={css.imageWrapper}>
-        {coverImage ? (
+        {coverImagePreview ? (
           <img
-            src={`http://localhost:3000${coverImage}`}
+            src={`http://localhost:3000${coverImagePreview}`}
             alt={title}
             className={css.image}
           />

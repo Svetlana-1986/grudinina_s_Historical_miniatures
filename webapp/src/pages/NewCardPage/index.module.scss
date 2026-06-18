@@ -1,2 +1,68 @@
+@use '../../styles/vars.scss' as vars;
 
+.uploadGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
+.uploadLabel {
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeLg;
+  font-weight: 600;
+}
+
+.uploadInput {
+  padding: 14px;
+  border: 1px dashed vars.$borderColor;
+  border-radius: vars.$borderRadiusMedium;
+  background: vars.$surfacePrimary;
+  color: vars.$textSecondary;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.uploadInput:hover {
+  border-color: vars.$sandy;
+  background: rgb(209 180 106 / 5%);
+}
+
+.uploadRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.fileInfo {
+  color: vars.$textSecondary;
+  font-size: vars.$fontSizeLg;
+  white-space: nowrap;
+}
+
+.fileButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid vars.$borderColor;
+  background: vars.$surfacePrimary;
+  color: vars.$textPrimary;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.fileButton:hover {
+  border-color: vars.$sandy;
+  background: rgb(209 180 106 / 8%);
+}
+
+.hiddenInput {
+  display: none;
+}

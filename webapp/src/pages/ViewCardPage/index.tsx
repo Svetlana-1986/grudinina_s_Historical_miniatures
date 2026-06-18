@@ -64,7 +64,7 @@ export const ViewCardPage = () => {
         {card.coverImage && (
           <div className={css.coverWrapper}>
             <img
-              src={`http://localhost:3000${card.coverImage}`}
+              src={`http://localhost:3000${card.coverImageHero}`}
               alt={card.title}
               className={css.coverImage}
             />

@@ -13,6 +13,10 @@ export const zCreateCardTrpcInput = z.object({
 
   coverImage: z.string().optional(),
 
+  coverImagePreview: z.string().optional(),
+
+  coverImageHero: z.string().optional(),
+
   images: z.array(z.string()).default([]),
 });
 

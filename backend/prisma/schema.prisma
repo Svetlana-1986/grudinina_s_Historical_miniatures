@@ -36,6 +36,8 @@ model Card {
   title String
   historicalPeriod HistoricalPeriod
   coverImage String?
+  coverImagePreview String?
+  coverImageHero String?
   images CardImage[]
   description String
   createdAt DateTime @default(now())
