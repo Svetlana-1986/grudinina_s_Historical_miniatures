@@ -5,7 +5,7 @@ import cors from 'cors';
 import { trpcRouter } from './router/index.js';
 import { applyTrpcToExpressApp } from './lib/trpcExpress.js';
 import path from 'path';
-import uploadRouter from '../src/router/upload.js';
+import uploadRouter from './router/upload.js'
 
 export type { TrpcRouter } from './router/index.js';
 
