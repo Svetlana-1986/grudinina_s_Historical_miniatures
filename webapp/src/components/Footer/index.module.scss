@@ -1,0 +1,97 @@
+@use '../../styles/vars.scss' as vars;
+
+.footer {
+  width: 100%;
+  margin-top: 48px;
+  border-top: 1px solid vars.$borderColor;
+  background: linear-gradient(
+    180deg,
+    vars.$surfacePrimary 0%,
+    vars.$backgroundPrimary 100%
+  );
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.logo {
+  font-family: vars.$titleFontFamily;
+  font-size: vars.$fontSizeXnl;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: vars.$sandy;
+}
+
+.description {
+  max-width: 620px;
+  font-size: vars.$fontSizeMd;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  color: vars.$textMuted;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 4px;
+}
+
+.links a {
+  color: vars.$textPrimary;
+  letter-spacing: 1px;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: vars.$sandy;
+}
+
+.copyright {
+  color: vars.$textMuted;
+  font-size: vars.$fontSizeMd;
+  letter-spacing: 1px;
+  padding-top: 6px;
+}
+
+@media (width <= 768px) {
+  .container {
+    padding: 36px 20px;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .links {
+    gap: 16px;
+  }
+}

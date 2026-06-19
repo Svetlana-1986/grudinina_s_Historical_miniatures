@@ -1,12 +1,6 @@
 @use '../../styles/vars.scss' as vars;
 @use '../../styles/mixins.scss' as mixins;
 
-// .cards {
-//   display: flex;
-//   flex-direction: column;
-//   gap: vars.$spacingLg;
-// }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -59,33 +53,3 @@
   }
 }
 
-// @use '../../styles/vars.scss' as vars;
-// @use '../../styles/mixins.scss' as css;
-
-// .cards {
-//   .card {
-//     padding: 20px;
-//     border: 1px solid vars.$sandy;
-//     border-radius: 10px;
-
-//     & + .card {
-//       margin-top: 20px;
-//     }
-
-//     .cardLink {
-//       @include css.link;
-//     }
-
-//     .cardMeta {
-//       font-size: vars.$fontSizeMd;
-
-//       & + .cardMeta {
-//         margin-top: 2px;
-//       }
-//     }
-
-//     .cardDescription {
-//       font-size: vars.$fontSizeMd;
-//     }
-//   }
-// }

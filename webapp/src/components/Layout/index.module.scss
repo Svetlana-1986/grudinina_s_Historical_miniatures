@@ -3,6 +3,8 @@
 
 .layout {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -135,8 +137,9 @@
 }
 
 .main {
-  padding-top: vars.$spacingXl;
-  padding-bottom: vars.$spacingXl;
+  flex: 1;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 @media (width <= 1024px) {
@@ -226,7 +229,6 @@
 .mobileSignOutButton:hover {
   color: vars.$sandy;
 }
-
 
 .mobileRegister {
   display: inline-flex;

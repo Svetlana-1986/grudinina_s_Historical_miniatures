@@ -1,0 +1,46 @@
+@use '../../styles/vars.scss' as vars;
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.card {
+  background: vars.$surfacePrimary;
+  border: 1px solid vars.$borderColor;
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: vars.$sandy;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 20%);
+}
+
+.icon {
+  font-size: 52px;
+  color: vars.$sandy;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: vars.$titleFontFamily;
+  color: vars.$textPrimary;
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.description {
+  color: vars.$textMuted;
+  line-height: 1.7;
+  font-size: vars.$fontSizeLg;
+  letter-spacing: 1px;
+}

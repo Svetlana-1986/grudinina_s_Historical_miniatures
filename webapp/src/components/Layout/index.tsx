@@ -21,6 +21,8 @@ import { SignOutButton } from '../SignOutButton';
 
 import { useState } from 'react';
 
+import { Footer } from '../Footer';
+
 export const Layout = () => {
   const { isAuthorized, user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -169,8 +171,10 @@ export const Layout = () => {
       <main className={css.main}>
         <div className={css.container}>
           <Outlet />
+          
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

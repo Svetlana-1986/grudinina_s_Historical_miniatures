@@ -25,3 +25,5 @@ export const getSignUpRoutePage = () => '/sign-up';
 export const getSignInRoutePage = () => '/sign-in';
 
 export const getProfileRoutePage = () => '/profile';
+
+export const getAboutRoutePage = () => '/about';

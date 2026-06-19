@@ -97,8 +97,6 @@ export const ViewCardPage = () => {
       </section>
 
       <section className={css.content}>
-        <div className={css.description}>{card.description}</div>
-
         {card.images.length > 0 && (
           <section className={css.gallery}>
             {card.images.map((image, imageIndex) => (
@@ -118,6 +116,7 @@ export const ViewCardPage = () => {
             ))}
           </section>
         )}
+        <div className={css.description}>{card.description}</div>
       </section>
       <Lightbox
         open={open}

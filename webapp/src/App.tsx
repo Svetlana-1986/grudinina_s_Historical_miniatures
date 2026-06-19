@@ -10,7 +10,7 @@ import { BlogPage } from './pages/BlogPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { SignInPage } from './pages/SignInPage';
 import { ProfilePage } from './pages/ProfilePage';
-
+import { AboutPage } from './pages/AboutPage';
 import './styles/global.scss';
 
 export const App = () => {
@@ -46,7 +46,18 @@ export const App = () => {
               path={routes.getSignInRoutePage()}
               element={<SignInPage />}
             />
-            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route
+              path={routes.getProfileRoutePage ()}
+              element={<ProfilePage />}
+            />
+
+            <Route
+              path={routes.getAboutRoutePage ()}
+              element={<AboutPage />}
+            />
+
+            {/* <Route path="/profile" element={<ProfilePage />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>

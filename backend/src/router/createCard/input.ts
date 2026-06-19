@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { HistoricalPeriod } from '@prisma/client';
 
 export const zCreateCardTrpcInput = z.object({
-  title: z.string().min(1),
+  title: z.string().min(1, 'Поле не заполнено'),
 
   historicalPeriod: z.nativeEnum(HistoricalPeriod),
 

@@ -1,4 +1,7 @@
 @use 'reset-css/reset';
+
+@use './fonts';
+
 @use './vars' as *;
 
 html,
@@ -34,27 +37,3 @@ a {
   background-color: $sandy;
   color: $black;
 }
-
-// ::-webkit-scrollbar {
-//   width: 12px;
-// }
-
-// ::-webkit-scrollbar-track {
-//   background: #141b25;
-// }
-
-// ::-webkit-scrollbar-thumb {
-//   background: $sandy;
-
-//   border-radius: 999px;
-
-//   border: 2px solid #141b25;
-// }
-
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #e1c27a;
-// }
-
-// html {
-//   scrollbar-color: #cba75d #141b25;
-// }
