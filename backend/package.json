@@ -11,7 +11,7 @@
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
-    "prepare": "true",
+    "prepare": "npm run prisma:generate",
     "types": "tsc --noEmit",
     "lint": "eslint --ext .ts ."
   },
