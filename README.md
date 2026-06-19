@@ -1,30 +1,33 @@
-Платформа для публикации военно-исторической миниатюры.
+Platform for Publishing Military History Miniatures
 
-Возможности
-- регистрация пользователей
-- авторизация
-- создание публикаций
-- загрузка изображений
-- галерея работ
-- блог
-- профиль пользователя
+Features
+•	User registration
+•	User authentication
+•	Creating posts
+•	Image uploading
+•	Project gallery
+•	Blog
+•	User profile
 
-Технологии
+Technologies
+
 Frontend:
-- React
-- TypeScript
-- Vite
-- SCSS
+•	React
+•	TypeScript
+•	Vite
+•	SCSS
 
 Backend:
-- Node.js
-- Express
-- Prisma
-- PostgreSQL
+•	Node.js
+•	Express
+•	Prisma
+•	PostgreSQL
 
 Database:
-- PostgreSQL
+•	PostgreSQL
 
-Запуск
+Getting Started
+bash
 npm install
 npm run dev
+
