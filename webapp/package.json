@@ -15,8 +15,8 @@
   "dependencies": {
     "@miniaturenick/backend": "*",
     "@tanstack/react-query": "^5.100.5",
-    "@trpc/client": "^11.16.0",
-    "@trpc/react-query": "^11.16.0",
+    "@trpc/client": "^11.17.0",
+    "@trpc/react-query": "^11.17.0",
     "classnames": "^2.5.1",
     "date-fns": "^4.3.0",
     "formik-validator-zod": "^2.2.0",

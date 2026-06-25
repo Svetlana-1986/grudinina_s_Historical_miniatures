@@ -3,6 +3,7 @@ import { TRPCError } from '@trpc/server';
 
 import { trpc } from '../../lib/trpc.js';
 
+
 export const getCardTrpcRoute = trpc.procedure
   .input(
     z.object({
@@ -37,3 +38,4 @@ export const getCardTrpcRoute = trpc.procedure
       card,
     };
   });
+
