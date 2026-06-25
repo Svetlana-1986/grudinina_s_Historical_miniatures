@@ -17,8 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "concurrently \"npm run lint --workspace backend\" \"npm run lint --workspace webapp\"",
-    "prepare": "echo skip husky"
-    
+    "prepare": ""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.59.1",
