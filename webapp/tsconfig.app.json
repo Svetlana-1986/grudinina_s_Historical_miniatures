@@ -7,10 +7,10 @@
     "module": "esnext",
     "types": ["vite/client"],
     "skipLibCheck": true,
-    "paths": {
-      "@miniaturenick/backend": ["../backend/src/index.ts"],
-      "@miniaturenick/backend/*": ["../backend/src/*"]
-    },
+    // "paths": {
+    //   "@miniaturenick/backend": ["../backend/src/index.ts"],
+    //   "@miniaturenick/backend/*": ["../backend/src/*"]
+    // },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
