@@ -1,24 +1,22 @@
-import { HistoricalPeriod } from '@prisma/client';
+export const historicalPeriodLabels = {
+  ANCIENT: 'Древний мир',
 
-export const historicalPeriodLabels: Record<HistoricalPeriod, string> = {
-  [HistoricalPeriod.ANCIENT]: 'Древний мир',
+  MIDDLE_AGES: 'Средневековье',
 
-  [HistoricalPeriod.MIDDLE_AGES]: 'Средневековье',
+  NAPOLEONIC_WARS: 'Наполеоновские войны',
 
-  [HistoricalPeriod.NAPOLEONIC_WARS]: 'Наполеоновские войны',
+  WORLD_WAR_1: 'Первая мировая война',
 
-  [HistoricalPeriod.WORLD_WAR_1]: 'Первая мировая война',
+  WORLD_WAR_2: 'Вторая мировая война',
 
-  [HistoricalPeriod.WORLD_WAR_2]: 'Вторая мировая война',
+  FANTASY: 'Фэнтези',
 
-  [HistoricalPeriod.FANTASY]: 'Фэнтези',
+  OTHER: 'Иное',
+} as const;
 
-  [HistoricalPeriod.OTHER]: 'Иное',
-};
-
-export const historicalPeriodOptions = Object.values(HistoricalPeriod).map(
-  (period) => ({
-    value: period,
-    label: historicalPeriodLabels[period],
-  }),
-);
+export const historicalPeriodOptions = Object.entries(
+  historicalPeriodLabels,
+).map(([value, label]) => ({
+  value,
+  label,
+}));
