@@ -11,6 +11,7 @@
     "dev:backend": "npm run dev --workspace backend",
     "dev:webapp": "npm run dev --workspace webapp",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:webapp\"",
+    "build": "npm run build --workspace webapp",
     "types:backend": "npm run types --workspace backend",
     "types:webapp": "npm run types --workspace webapp",
     "types": "concurrently \"npm run types:backend\" \"npm run types:webapp\"",
