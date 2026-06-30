@@ -48,16 +48,11 @@ export const App = () => {
             />
 
             <Route
-              path={routes.getProfileRoutePage ()}
+              path={routes.getProfileRoutePage()}
               element={<ProfilePage />}
             />
 
-            <Route
-              path={routes.getAboutRoutePage ()}
-              element={<AboutPage />}
-            />
-
-            {/* <Route path="/profile" element={<ProfilePage />} /> */}
+            <Route path={routes.getAboutRoutePage()} element={<AboutPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

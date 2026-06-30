@@ -39,9 +39,9 @@ export const MainCardPage = () => {
               В ГАЛЕРЕЮ
             </Link>
 
-            <a href="/about" className={css.heroButtonSecondary}>
+            <Link to="/about" className={css.heroButtonSecondary}>
               О ПРОЕКТЕ
-            </a>
+            </Link>
           </div>
         </div>
       </section>
