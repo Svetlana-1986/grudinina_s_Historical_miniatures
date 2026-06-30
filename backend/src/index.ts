@@ -16,11 +16,7 @@ const bootstrap = async () => {
 
   app.use(
     cors({
-      origin: [
-        'http://localhost:5173',
-        'https://grudinina-s-historical-miniatures-webapp-a4r2oh03e-miniatura.vercel.app',
-      ],
-
+      origin: true,
       credentials: true,
     }),
   );
