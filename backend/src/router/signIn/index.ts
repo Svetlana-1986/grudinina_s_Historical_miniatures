@@ -43,9 +43,9 @@ export const signInTrpcRoute = trpc.procedure
     ctx.res.cookie('sessionToken', sessionToken, {
       httpOnly: true,
 
-      secure: false,
+      secure: true,
 
-      sameSite: 'lax',
+      sameSite: 'none',
 
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
     });
