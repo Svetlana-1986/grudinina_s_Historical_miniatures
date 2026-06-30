@@ -1,15 +1,20 @@
 import { z } from 'zod';
-import { HistoricalPeriod } from '@prisma/client';
+import { HistoricalPeriod } from '../../shared/historicalPeriod.js';
 
 export const zCreateCardTrpcInput = z.object({
-  title: z.string().min(1, 'Поле не заполнено'),
+  title: z.string().min(1),
 
-  historicalPeriod: z.nativeEnum(HistoricalPeriod),
+  historicalPeriod: z.enum([
+  HistoricalPeriod.ANCIENT,
+  HistoricalPeriod.MIDDLE_AGES,
+  HistoricalPeriod.NAPOLEONIC_WARS,
+  HistoricalPeriod.WORLD_WAR_1,
+  HistoricalPeriod.WORLD_WAR_2,
+  HistoricalPeriod.FANTASY,
+  HistoricalPeriod.OTHER,
+]),
 
-  description: z
-    .string()
-    .min(1, 'Поле не заполнено')
-    .max(5000, 'Поле должно содержать не больше 5000 символов'),
+  description: z.string(),
 
   coverImage: z.string().optional(),
 

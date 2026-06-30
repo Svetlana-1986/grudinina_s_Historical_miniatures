@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { getViewCardPageRoute } from '../../lib/routes';
 
-import type { HistoricalPeriod } from '@prisma/client';
+import type { HistoricalPeriod } from '../../lib/historicalPeriods';
 
 import { historicalPeriodLabels } from '../../lib/historicalPeriods';
 

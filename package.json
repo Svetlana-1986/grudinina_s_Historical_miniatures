@@ -11,13 +11,14 @@
     "dev:backend": "npm run dev --workspace backend",
     "dev:webapp": "npm run dev --workspace webapp",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:webapp\"",
+    "build": "npm run build --workspace backend && npm run build --workspace webapp",
     "types:backend": "npm run types --workspace backend",
     "types:webapp": "npm run types --workspace webapp",
     "types": "concurrently \"npm run types:backend\" \"npm run types:webapp\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "concurrently \"npm run lint --workspace backend\" \"npm run lint --workspace webapp\"",
-    "prepare": "echo skip husky"
+    "prepare": ""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.59.1",

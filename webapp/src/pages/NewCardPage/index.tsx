@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { Button } from '../../components/Button';
 import { FormItems } from '../../components/FormItems';
-import { HistoricalPeriod } from '@prisma/client';
+import type { HistoricalPeriod } from '../../lib/historicalPeriods';
 import { historicalPeriodOptions } from '../../lib/historicalPeriods';
 import { Select } from '../../components/Select';
 import { Navigate } from 'react-router-dom';
@@ -41,7 +41,7 @@ export const NewCardPage = () => {
   const formik = useFormik<CreateCardInput>({
     initialValues: {
       title: '',
-      historicalPeriod: HistoricalPeriod.ANCIENT,
+      historicalPeriod: 'ANCIENT' as HistoricalPeriod,
       description: '',
       coverImage: undefined,
       coverImagePreview: undefined,
