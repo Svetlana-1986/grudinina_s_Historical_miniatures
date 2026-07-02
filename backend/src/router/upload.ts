@@ -4,20 +4,9 @@ import path from 'path';
 import sharp from 'sharp';
 
 import { upload } from '../lib/upload.js';
+import { supabase } from '../lib/supabase.js';
 
 const router = Router();
-
-const previewDir = path.resolve(process.cwd(), 'uploads/cards/preview');
-
-const heroDir = path.resolve(process.cwd(), 'uploads/cards/hero');
-
-fs.mkdirSync(previewDir, {
-  recursive: true,
-});
-
-fs.mkdirSync(heroDir, {
-  recursive: true,
-});
 
 router.post(
   '/upload/card-image',
@@ -35,15 +24,11 @@ router.post(
 
       const fileNameWithoutExt = path.parse(req.file.filename).name;
 
-      const previewFileName = `${fileNameWithoutExt}.webp`;
+      const previewFileName = `${fileNameWithoutExt}-preview.webp`;
 
-      const heroFileName = `${fileNameWithoutExt}.webp`;
+      const heroFileName = `${fileNameWithoutExt}-hero.webp`;
 
-      const previewFilePath = path.join(previewDir, previewFileName);
-
-      const heroFilePath = path.join(heroDir, heroFileName);
-
-      await sharp(originalFilePath)
+      const previewBuffer = await sharp(originalFilePath)
         .resize({
           width: 400,
           withoutEnlargement: true,
@@ -51,9 +36,9 @@ router.post(
         .webp({
           quality: 80,
         })
-        .toFile(previewFilePath);
+        .toBuffer();
 
-      await sharp(originalFilePath)
+      const heroBuffer = await sharp(originalFilePath)
         .resize({
           width: 1600,
           withoutEnlargement: true,
@@ -61,14 +46,43 @@ router.post(
         .webp({
           quality: 90,
         })
-        .toFile(heroFilePath);
+        .toBuffer();
+
+      const { error: previewError } = await supabase.storage
+        .from('cards')
+        .upload(`preview/${previewFileName}`, previewBuffer, {
+          contentType: 'image/webp',
+          upsert: false,
+        });
+
+      if (previewError) {
+        throw previewError;
+      }
+
+      const { error: heroError } = await supabase.storage
+        .from('cards')
+        .upload(`hero/${heroFileName}`, heroBuffer, {
+          contentType: 'image/webp',
+          upsert: false,
+        });
+
+      if (heroError) {
+        throw heroError;
+      }
+
+      const previewUrl = supabase.storage
+        .from('cards')
+        .getPublicUrl(`preview/${previewFileName}`).data.publicUrl;
+
+      const heroUrl = supabase.storage
+        .from('cards')
+        .getPublicUrl(`hero/${heroFileName}`).data.publicUrl;
+
+      fs.unlinkSync(originalFilePath);
 
       return res.json({
-        originalUrl: `/uploads/cards/${req.file.filename}`,
-
-        previewUrl: `/uploads/cards/preview/${previewFileName}`,
-
-        heroUrl: `/uploads/cards/hero/${heroFileName}`,
+        previewUrl,
+        heroUrl,
       });
     } catch (error) {
       console.error(error);

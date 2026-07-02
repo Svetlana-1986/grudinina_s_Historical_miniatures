@@ -2,10 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
-const uploadDir = path.resolve(
-  process.cwd(),
-  'uploads/cards',
-);
+const uploadDir = path.resolve(process.cwd(), 'uploads/cards');
 
 fs.mkdirSync(uploadDir, {
   recursive: true,
@@ -19,12 +16,7 @@ const storage = multer.diskStorage({
   filename(req, file, cb) {
     const ext = path.extname(file.originalname);
 
-    cb(
-      null,
-      `${Date.now()}-${Math.random()
-        .toString(36)
-        .slice(2)}${ext}`,
-    );
+    cb(null, `${Date.now()}-${Math.random().toString(36).slice(2)}${ext}`);
   },
 });
 
