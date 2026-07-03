@@ -3,11 +3,20 @@ export const uploadImage = async (file: File) => {
 
   formData.append('image', file);
 
-  const response = await fetch('http://localhost:3000/upload/card-image', {
-    method: 'POST',
-    body: formData,
-    credentials: 'include',
-  });
+  const response = await fetch(
+    'https://miniaturenickbackend-production.up.railway.app/upload/card-image',
+    {
+      method: 'POST',
+      body: formData,
+      credentials: 'include',
+    },
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+
+    throw new Error(errorText);
+  }
 
   return response.json();
 };
