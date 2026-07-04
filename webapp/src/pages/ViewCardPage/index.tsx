@@ -27,6 +27,8 @@ import 'yet-another-react-lightbox/styles.css';
 
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
+import { API_URL } from '../../lib/config';
+
 export const ViewCardPage = () => {
   const params = useParams<ViewCardPageRouteParams>();
 
@@ -64,7 +66,7 @@ export const ViewCardPage = () => {
         {card.coverImage && (
           <div className={css.coverWrapper}>
             <img
-              src={`http://localhost:3000${card.coverImageHero}`}
+              src={`${API_URL}${card.coverImageHero}`}
               alt={card.title}
               className={css.coverImage}
             />
@@ -108,10 +110,7 @@ export const ViewCardPage = () => {
                   setOpen(true);
                 }}
               >
-                <img
-                  src={`http://localhost:3000${image.imageUrl}`}
-                  alt={card.title}
-                />
+                <img src={`${API_URL}${image.imageUrl}`} alt={card.title} />
               </div>
             ))}
           </section>
@@ -135,8 +134,8 @@ export const ViewCardPage = () => {
           borderRadius: 8,
         }}
         slides={card.images.map((image) => ({
-          src: `http://localhost:3000${image.imageUrl}`,
-          download: `http://localhost:3000${image.imageUrl}`,
+          src: `${API_URL}${image.imageUrl}`,
+          download: `${API_URL}${image.imageUrl}`,
         }))}
       />
     </div>
