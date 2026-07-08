@@ -24,11 +24,26 @@ router.post(
 
       const fileNameWithoutExt = path.parse(req.file.filename).name;
 
+      const originalFileName = req.file.filename;
+
+      const originalBuffer = fs.readFileSync(originalFilePath);
+
+      const { error: originalError } = await supabase.storage
+        .from('cards')
+        .upload(`original/${originalFileName}`, originalBuffer, {
+          contentType: req.file.mimetype,
+          upsert: false,
+        });
+
+      if (originalError) {
+        throw originalError;
+      }
+
       const previewFileName = `${fileNameWithoutExt}-preview.webp`;
 
       const heroFileName = `${fileNameWithoutExt}-hero.webp`;
 
-      const previewBuffer = await sharp(originalFilePath)
+      const previewBuffer = await sharp(originalBuffer)
         .resize({
           width: 400,
           withoutEnlargement: true,
@@ -38,7 +53,7 @@ router.post(
         })
         .toBuffer();
 
-      const heroBuffer = await sharp(originalFilePath)
+      const heroBuffer = await sharp(originalBuffer)
         .resize({
           width: 1600,
           withoutEnlargement: true,
@@ -70,6 +85,10 @@ router.post(
         throw heroError;
       }
 
+      const originalUrl = supabase.storage
+        .from('cards')
+        .getPublicUrl(`original/${originalFileName}`).data.publicUrl;
+
       const previewUrl = supabase.storage
         .from('cards')
         .getPublicUrl(`preview/${previewFileName}`).data.publicUrl;
@@ -78,9 +97,14 @@ router.post(
         .from('cards')
         .getPublicUrl(`hero/${heroFileName}`).data.publicUrl;
 
-      fs.unlinkSync(originalFilePath);
+      try {
+        fs.unlinkSync(originalFilePath);
+      } catch (error) {
+        console.warn('Failed to remove temp file', error);
+      }
 
       return res.json({
+        originalUrl,
         previewUrl,
         heroUrl,
       });
