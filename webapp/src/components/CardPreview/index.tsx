@@ -8,8 +8,6 @@ import { historicalPeriodLabels } from '../../lib/historicalPeriods';
 
 import css from './index.module.scss';
 
-import { API_URL } from '../../lib/config';
-
 type Props = {
   id: string;
   slug: string;
@@ -37,11 +35,7 @@ export const CardPreview = ({
     >
       <div className={css.imageWrapper}>
         {coverImagePreview ? (
-          <img
-            src={`${API_URL}${coverImagePreview}`}
-            alt={title}
-            className={css.image}
-          />
+          <img src={coverImagePreview} alt={title} className={css.image} />
         ) : (
           <div className={css.placeholder}>Нет изображения</div>
         )}
