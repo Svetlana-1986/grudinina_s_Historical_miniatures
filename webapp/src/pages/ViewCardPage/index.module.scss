@@ -1,12 +1,16 @@
 @use '../../styles/vars.scss' as vars;
 
 .page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: vars.$spacingXl;
 }
 
 .hero {
+  width: 100%;
   padding: 48px;
   border-radius: vars.$borderRadiusLarge;
   border: 1px solid vars.$borderColor;
@@ -52,6 +56,7 @@
 }
 
 .content {
+  width: 100%;
   padding: 40px;
   border-radius: vars.$borderRadiusLarge;
   border: 1px solid vars.$borderColor;
@@ -65,25 +70,6 @@
   line-height: 1.9;
   white-space: pre-wrap;
   padding-top: 24px;
-}
-
-@media (width <= 768px) {
-  .hero {
-    padding: 24px;
-  }
-
-  .content {
-    padding: 24px;
-  }
-
-  .meta {
-    flex-direction: column;
-    gap: vars.$spacingSm;
-  }
-
-  .description {
-    font-size: vars.$fontSizeMd;
-  }
 }
 
 .gallery {
@@ -118,10 +104,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #111827;
-  border-radius: 18px;
   overflow: hidden;
-  margin-bottom: 24px;
+
+  // width: 100%;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // background: #111827;
+  // border-radius: 18px;
+  // overflow: hidden;
+  // margin-bottom: 24px;
 }
 
 .coverImage {
@@ -129,4 +121,55 @@
   max-height: 900px;
   object-fit: contain;
   display: block;
+  margin-inline: auto;
+}
+
+// @media (width <= 768px) {
+//   .hero {
+//     padding: 24px;
+//   }
+
+//   .content {
+//     padding: 24px;
+//   }
+
+//   .meta {
+//     flex-direction: column;
+//     gap: vars.$spacingSm;
+//   }
+
+//   .description {
+//     font-size: vars.$fontSizeMd;
+//   }
+
+//   .gallery {
+//     grid-template-columns: 1fr;
+//   }
+// }
+
+@media (width <= 768px) {
+  .page {
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 16px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .coverWrapper {
+    margin-bottom: 16px;
+  }
+
+  .coverImage {
+    max-width: 100%;
+  }
 }

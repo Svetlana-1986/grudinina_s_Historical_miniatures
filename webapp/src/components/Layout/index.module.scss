@@ -164,7 +164,7 @@
 
 @media (width <= 768px) {
   .container {
-    padding: 0 16px;
+    padding-inline: clamp(8px, 3vw, 16px);
   }
 
   .nav,

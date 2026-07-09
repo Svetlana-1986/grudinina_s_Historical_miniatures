@@ -3,7 +3,7 @@
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: vars.$spacingLg;
 }
 
@@ -53,3 +53,8 @@
   }
 }
 
+@media (width <= 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
