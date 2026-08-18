@@ -21,7 +21,22 @@ export const getCurrentUser = async (ctx: AppContext) => {
     return null;
   }
 
-  if (session.expiresAt < new Date()) {
+  const isExpired = session.expiresAt < new Date();
+
+  if (isExpired) {
+    try {
+      await ctx.prisma.session.delete({
+        where: {
+          id: session.id,
+        },
+      });
+    } catch (error) {
+      console.error(
+        `[Session] Не удалось удалить просроченную сессию ${session.id}`,
+        error,
+      );
+    }
+
     return null;
   }
 

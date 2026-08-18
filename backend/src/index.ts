@@ -9,14 +9,21 @@ import uploadRouter from './router/upload.js';
 
 export type { TrpcRouter } from './router/index.js';
 
+const PORT = Number(process.env.PORT ?? 3000);
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') || [
+  'http://localhost:5173',
+];
+
 const bootstrap = async () => {
   const app = express();
 
+  // Static file serving for local image storage.
+// Required when IMAGE_STORAGE=local.
   app.use('/uploads', express.static(path.resolve(process.cwd(), 'uploads')));
 
   app.use(
     cors({
-      origin: true,
+      origin: process.env.NODE_ENV === 'production' ? ALLOWED_ORIGINS : true,
       credentials: true,
     }),
   );
@@ -31,8 +38,13 @@ const bootstrap = async () => {
 
   applyTrpcToExpressApp(app, trpcRouter);
 
-  app.listen(3000, () => {
-    console.info('Listening at http://localhost:3000');
+  const server = app.listen(PORT, () => {
+    console.info(`Server is running at http://localhost:${PORT}`);
+  });
+
+  server.on('error', (error) => {
+    console.error('Server failed to start:', error);
+    process.exit(1);
   });
 };
 
