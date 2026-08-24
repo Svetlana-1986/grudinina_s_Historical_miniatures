@@ -10,6 +10,7 @@ export const applyTrpcToExpressApp = (
   app: express.Express,
   router: AnyRouter,
 ) => {
+  // Подключение всех процедур tRPC к Express-приложению
   app.use(
     '/trpc',
     trpcExpress.createExpressMiddleware({

@@ -1,39 +1,40 @@
-import { uploadImage } from '../../api/uploadImage';
+import { useRef, useState } from 'react';
 import { useFormik } from 'formik';
-import { Segment } from '../../components/Segment';
-import { Input } from '../../components/Input';
-import { TextArea } from '../../components/TextArea';
-import { Alert } from '../../components/Alert';
 import { withZodSchema } from 'formik-validator-zod';
-import { trpc } from '../../lib/trpc';
+import { Navigate } from 'react-router-dom';
+
+import { uploadImage } from '../../api/uploadImage';
+import { Alert } from '../../components/Alert';
+import { Button } from '../../components/Button';
+import { FormItems } from '../../components/FormItems';
+import { Input } from '../../components/Input';
+import { Segment } from '../../components/Segment';
+import { Select } from '../../components/Select';
+import { TextArea } from '../../components/TextArea';
+
 import {
   zCreateCardTrpcInput,
   type CreateCardInput,
 } from '@miniaturenick/backend/createCard/input';
-import { useState } from 'react';
-import { Button } from '../../components/Button';
-import { FormItems } from '../../components/FormItems';
+
+import { trpc } from '../../lib/trpc';
 import type { HistoricalPeriod } from '../../lib/historicalPeriods';
 import { historicalPeriodOptions } from '../../lib/historicalPeriods';
-import { Select } from '../../components/Select';
-import { Navigate } from 'react-router-dom';
+
 import { useAuth } from '../../hooks/useAuth';
-import { useRef } from 'react';
+
 import css from './index.module.scss';
 
 export const NewCardPage = () => {
   const { isAuthorized, isLoading } = useAuth();
 
   const [successMessageVisible, setSuccessMessageVisible] = useState(false);
-
   const [submittingError, setSubmittingError] = useState<string | null>(null);
 
   const [coverFile, setCoverFile] = useState<File | null>(null);
-
   const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
 
   const coverInputRef = useRef<HTMLInputElement>(null);
-
   const galleryInputRef = useRef<HTMLInputElement>(null);
 
   const createCard = trpc.createCard.useMutation();
@@ -50,6 +51,7 @@ export const NewCardPage = () => {
     },
 
     validate: withZodSchema(zCreateCardTrpcInput),
+
     onSubmit: async (values) => {
       try {
         setSubmittingError(null);
@@ -58,40 +60,46 @@ export const NewCardPage = () => {
         let coverImagePreview: string | undefined;
         let coverImageHero: string | undefined;
 
+        /*
+         * Загружаем главное изображение.
+         */
         if (coverFile) {
           const uploadedCover = await uploadImage(coverFile);
 
-          coverImage = uploadedCover.originalUrl;
-
-          coverImagePreview = uploadedCover.previewUrl;
-
-          coverImageHero = uploadedCover.heroUrl;
+          coverImage = uploadedCover.original.url;
+          coverImagePreview = uploadedCover.preview.url;
+          coverImageHero = uploadedCover.hero.url;
         }
 
-        const galleryUrls: string[] = [];
+        /*
+         * Загружаем изображения галереи.
+         */
 
-        for (const file of galleryFiles) {
-          const uploadedImage = await uploadImage(file);
+        const uploadedImages = await Promise.all(
+          galleryFiles.map((file) => uploadImage(file)),
+        );
 
-          galleryUrls.push(uploadedImage.originalUrl);
-        }
+        const galleryUrls = uploadedImages.map((image) => image.original.url);
 
+        /*
+         * Создаём карточку.
+         */
         await createCard.mutateAsync({
           ...values,
 
           coverImage,
-
           coverImagePreview,
-
           coverImageHero,
 
           images: galleryUrls,
         });
 
+        /*
+         * Очищаем форму после успешного создания.
+         */
         formik.resetForm();
 
         setCoverFile(null);
-
         setGalleryFiles([]);
 
         if (coverInputRef.current) {
@@ -111,12 +119,14 @@ export const NewCardPage = () => {
         setSubmittingError(
           error instanceof Error ? error.message : 'Произошла ошибка',
         );
+
         setTimeout(() => {
           setSubmittingError(null);
         }, 3000);
       }
     },
   });
+
   if (isLoading) {
     return <div>Загрузка...</div>;
   }
@@ -134,6 +144,7 @@ export const NewCardPage = () => {
             label="Название"
             formik={formik}
           />
+
           <Select
             label="Период"
             name="historicalPeriod"
@@ -141,6 +152,7 @@ export const NewCardPage = () => {
             options={historicalPeriodOptions}
             onChange={formik.handleChange}
           />
+
           <div className={css.uploadRow}>
             <label className={css.fileButton} htmlFor="cover-upload">
               Выбрать главное фото
@@ -165,6 +177,7 @@ export const NewCardPage = () => {
                 : 'Главное фото не выбрано'}
             </div>
           </div>
+
           <div className={css.uploadRow}>
             <label className={css.fileButton} htmlFor="gallery-upload">
               Добавить фотографии
@@ -196,10 +209,13 @@ export const NewCardPage = () => {
             label="Описание миниатюры"
             formik={formik}
           />
+
           {!!submittingError && <Alert type="error">{submittingError}</Alert>}
+
           {successMessageVisible && (
             <Alert type="success">Карточка создана!</Alert>
           )}
+
           <Button type="submit" loading={formik.isSubmitting}>
             Создать карточку
           </Button>

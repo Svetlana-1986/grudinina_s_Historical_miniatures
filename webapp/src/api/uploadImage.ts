@@ -1,6 +1,29 @@
 import { API_URL } from '../lib/config';
 
-export const uploadImage = async (file: File) => {
+export interface UploadedImageResponse {
+  original: {
+    path: string;
+    url: string;
+  };
+
+  preview: {
+    path: string;
+    url: string;
+  };
+
+  hero: {
+    path: string;
+    url: string;
+  };
+}
+
+const makeAbsoluteUrl = (url: string): string => {
+  return new URL(url, API_URL).toString();
+};
+
+export const uploadImage = async (
+  file: File,
+): Promise<UploadedImageResponse> => {
   const formData = new FormData();
 
   formData.append('image', file);
@@ -17,5 +40,22 @@ export const uploadImage = async (file: File) => {
     throw new Error(errorText);
   }
 
-  return response.json();
+  const data = (await response.json()) as UploadedImageResponse;
+
+  return {
+    original: {
+      path: data.original.path,
+      url: makeAbsoluteUrl(data.original.url),
+    },
+
+    preview: {
+      path: data.preview.path,
+      url: makeAbsoluteUrl(data.preview.url),
+    },
+
+    hero: {
+      path: data.hero.path,
+      url: makeAbsoluteUrl(data.hero.url),
+    },
+  };
 };

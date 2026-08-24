@@ -1,8 +1,15 @@
 import { z } from 'zod';
 import { HistoricalPeriod } from '../../shared/historicalPeriod.js';
 
+const TITLE_MAX_LENGTH = 150;
+const DESCRIPTION_MAX_LENGTH = 5000;
+
 export const zCreateCardTrpcInput = z.object({
-  title: z.string().min(1, 'Минимальное количество символов 1'),
+  title: z
+    .string()
+    .trim()
+    .min(3, 'Название должно содержать минимум 3 символа')
+    .max(TITLE_MAX_LENGTH),
 
   historicalPeriod: z.enum([
     HistoricalPeriod.ANCIENT,
@@ -14,15 +21,15 @@ export const zCreateCardTrpcInput = z.object({
     HistoricalPeriod.OTHER,
   ]),
 
-  description: z.string(),
+  description: z.string().trim().max(DESCRIPTION_MAX_LENGTH),
 
-  coverImage: z.string().optional(),
+  coverImage: z.string().url().optional(),
 
-  coverImagePreview: z.string().optional(),
+  coverImagePreview: z.string().url().optional(),
 
-  coverImageHero: z.string().optional(),
+  coverImageHero: z.string().url().optional(),
 
-  images: z.array(z.string()).default([]),
+  images: z.array(z.string().url()).default([]),
 });
 
 export type CreateCardInput = z.infer<typeof zCreateCardTrpcInput>;
